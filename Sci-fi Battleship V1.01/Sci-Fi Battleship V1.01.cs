@@ -42,6 +42,52 @@ namespace Sci_fi_Battleship
 
         private void EnemyPlayTimerEvent(object sender, EventArgs e)
         {
+            if (PlayerPositionButtons.Count > 0 && Round > 0)
+            {
+                Round -= 1;
+                TxtRounds.Text = "Round: " + Round;
+                int Index = rand.Next(PlayerPositionButtons.Count);
+                if ((string)PlayerPositionButtons[Index].Tag == "Player Ship")
+                {
+                    PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
+                    EnemyAttack.Text = PlayerPositionButtons[Index].Text;
+                    PlayerPositionButtons[Index].Enabled = false;
+                    PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    PlayerPositionButtons.RemoveAt(Index);
+                    enemyScore += 1;
+                    txtEnemyS.Text = enemyScore.ToString();
+                    EnemyPlayTimer.Stop();
+                }
+                else
+                {
+                    PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.missIcon;
+                    EnemyAttack.Text = PlayerPositionButtons[Index].Text;
+                    PlayerPositionButtons[Index].Enabled = false;
+                    PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    PlayerPositionButtons.RemoveAt(Index);
+                    EnemyPlayTimer.Stop();
+                }
+            }
+            
+           if (Round < 1 || enemyScore > 2 || playerScore > 2)
+            {
+                if (playerScore > enemyScore)
+                {
+                    MessageBox.Show("You Win!", "Victory");
+                    RestartGame();
+                }
+                else if (playerScore < enemyScore)
+                {
+                    MessageBox.Show("You Loose!", "Defeat");
+                    RestartGame();
+                }
+                else if (playerScore == enemyScore)
+                {
+                    MessageBox.Show("It's a tie!", "Tie");
+                    RestartGame();
+                }
+            } 
+            
 
         }
 
@@ -50,6 +96,30 @@ namespace Sci_fi_Battleship
             if (ELocLB.Text != "")
             {
                 var AttackPosition = ELocLB.Text.ToLower();
+                int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+
+                if (EnemyPositionButtons[index].Enabled && Round > 0)
+                {
+                    Round -= 1;
+                    TxtRounds.Text = "Round: " + Round;
+
+                    if ((string)EnemyPositionButtons[index].Tag == "Enemy Ship")
+                    {
+                        EnemyPositionButtons[index].Enabled = false;
+                        EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
+                        EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                        playerScore += 1;
+                        txtPlayerS.Text = playerScore.ToString();
+                        EnemyPlayTimer.Start();
+                    }
+                    else
+                    {
+                        EnemyPositionButtons[index].Enabled = false;
+                        EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
+                        EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                        EnemyPlayTimer.Start();
+                    }
+                }
             }
             else
             {

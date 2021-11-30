@@ -7,7 +7,7 @@
     <ProjectGuid>{F52EECC9-4680-47F1-AB39-BED735242849}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Sci_fi_Battleship</RootNamespace>
-    <AssemblyName>Sci-fi Battleship</AssemblyName>
+    <AssemblyName>Sci-fi Battleship V1.01</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
