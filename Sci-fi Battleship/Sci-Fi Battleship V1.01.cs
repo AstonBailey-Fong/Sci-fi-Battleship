@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Media;
 
 namespace Sci_fi_Battleship
 {
@@ -46,12 +47,19 @@ namespace Sci_fi_Battleship
 
         private void AttackButtonEvent(object sender, EventArgs e)
         {
-
+            if (ELocLB.Text != "")
+            {
+                var AttackPosition = ELocLB.Text.ToLower();
+            }
+            else
+            {
+                MessageBox.Show("Choose a position to attack from the drop down box.", "Help");
+            }
         }
 
         private void PlayerPositonEvent(object sender, EventArgs e)
         {
-         if (totalShips > 0)
+            if (totalShips > 0)
             {
                 var button = (Button)sender;
 
@@ -59,13 +67,32 @@ namespace Sci_fi_Battleship
                 button.Tag = "Player Ship";
                 button.BackColor = Color.Orange;
                 totalShips -= 1;
-            }
-         if (totalShips == 0)
-            {
-                btnAttack.Enabled = true;
+                if (totalShips == 0)
+                {
+                    btnAttack.Enabled = true;
+                    btnAttack.BackColor = Color.Red;
+                    btnAttack.ForeColor = Color.White;
+                    txtHelp.Text = "2. Pick a positon to attack from the drop down box.";
+                }
             }
         }
 
+        private void enemyLocationPicker()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                int index = rand.Next(EnemyPositionButtons.Count);
+                if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
+                {
+                    EnemyPositionButtons[index].Tag = "Enemy Ship";
+                    Debug.WriteLine("Enemy Position: " + EnemyPositionButtons[index].Text);
+                }
+                else
+                {
+                    index = rand.Next(EnemyPositionButtons.Count);
+                }
+            }
+        }
 
         private void RestartGame()
         {
@@ -108,23 +135,5 @@ namespace Sci_fi_Battleship
 
         }
 
-
-        private void enemyLocationPicker()
-        {
-         for (int i = 0; i < 3; i++)
-            {
-                int index = rand.Next(EnemyPositionButtons.Count);
-                if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
-                {
-                    EnemyPositionButtons[index].Tag = "Enemy Ship";
-                    Debug.WriteLine("Enemy Position: " + EnemyPositionButtons[index].Text);
-                }
-                else
-                {
-                    index = rand.Next(EnemyPositionButtons.Count);
-                }
-            }
-        }
     }
-
 }
