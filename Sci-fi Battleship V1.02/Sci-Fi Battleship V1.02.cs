@@ -20,7 +20,6 @@ namespace Sci_fi_Battleship
 
         Random rand = new Random();
         int totalShips = 3;
-        int Round = 10;
         int playerScore;
         int enemyScore;
 
@@ -42,10 +41,8 @@ namespace Sci_fi_Battleship
 
         private void EnemyPlayTimerEvent(object sender, EventArgs e)
         {
-            if (PlayerPositionButtons.Count > 0 && Round > 0)
+            if (PlayerPositionButtons.Count > 0)
             {
-                Round -= 1;
-                TxtRounds.Text = "Round: " + Round;
                 int Index = rand.Next(PlayerPositionButtons.Count);
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Ship")
                 {
@@ -69,16 +66,21 @@ namespace Sci_fi_Battleship
                 }
             }
             
-           if (Round < 1 || enemyScore > 2 || playerScore > 2)
+           if (enemyScore > 2 || playerScore > 2)
             {
+                SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Stinger.wav");
+                SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Ship Lost.wav");
+
                 if (playerScore > enemyScore)
                 {
+                    Victory.Play();
                     MessageBox.Show("You Win!", "Victory");
                     RestartGame();
                 }
                 else if (playerScore < enemyScore)
                 {
-                    MessageBox.Show("You Loose!", "Defeat");
+                    Defeat.Play();
+                    MessageBox.Show("You Lose!", "Defeat");
                     RestartGame();
                 }
                 else if (playerScore == enemyScore)
@@ -93,15 +95,14 @@ namespace Sci_fi_Battleship
 
         private void AttackButtonEvent(object sender, EventArgs e)
         {
+            SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\input_failed_clean.wav");
             if (ELocLB.Text != "")
             {
                 var AttackPosition = ELocLB.Text.ToLower();
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
 
-                if (EnemyPositionButtons[index].Enabled && Round > 0)
+                if (EnemyPositionButtons[index].Enabled)
                 {
-                    Round -= 1;
-                    TxtRounds.Text = "Round: " + Round;
 
                     if ((string)EnemyPositionButtons[index].Tag == "Enemy Ship")
                     {
@@ -123,16 +124,45 @@ namespace Sci_fi_Battleship
             }
             else
             {
+                unable.Play();
                 MessageBox.Show("Choose a position to attack from the drop down box.", "Help");
+            }
+
+            if (enemyScore > 2 || playerScore > 2)
+            {
+                SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Stinger.wav");
+                SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Ship Lost.wav");
+
+                if (playerScore > enemyScore)
+                {
+                    Victory.Play();
+                    EnemyPlayTimer.Stop();
+                    MessageBox.Show("You Win!", "Victory");
+                    
+                    RestartGame();
+                }
+                else if (playerScore < enemyScore)
+                {
+                    Defeat.Play();
+                    EnemyPlayTimer.Stop();
+                    MessageBox.Show("You Lose!", "Defeat");
+                    RestartGame();
+                }
+                else if (playerScore == enemyScore)
+                {
+                    MessageBox.Show("It's a tie!", "Tie");
+                    RestartGame();
+                }
             }
         }
 
         private void PlayerPositonEvent(object sender, EventArgs e)
         {
+            SoundPlayer select = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\keyok6.wav");
             if (totalShips > 0)
             {
                 var button = (Button)sender;
-
+                select.Play();
                 button.Enabled = false;
                 button.Tag = "Player Ship";
                 button.BackColor = Color.Orange;
@@ -144,6 +174,7 @@ namespace Sci_fi_Battleship
                     btnAttack.ForeColor = Color.White;
                     txtHelp.Text = "2. Pick a positon to attack from the drop down box.";
                 }
+
             }
         }
 
@@ -193,7 +224,6 @@ namespace Sci_fi_Battleship
             }
             playerScore = 0;
             enemyScore = 0;
-            Round = 10;
             totalShips = 3;
             txtPlayerS.Text = playerScore.ToString();
             txtEnemyS.Text = enemyScore.ToString();

@@ -32,7 +32,6 @@ namespace Sci_fi_Battleship
             this.components = new System.ComponentModel.Container();
             this.txtPlayerS = new System.Windows.Forms.Label();
             this.txtEnemyS = new System.Windows.Forms.Label();
-            this.TxtRounds = new System.Windows.Forms.Label();
             this.txtHelp = new System.Windows.Forms.Label();
             this.ELocLB = new System.Windows.Forms.ComboBox();
             this.btnAttack = new System.Windows.Forms.Button();
@@ -96,18 +95,6 @@ namespace Sci_fi_Battleship
             this.txtEnemyS.Size = new System.Drawing.Size(49, 32);
             this.txtEnemyS.TabIndex = 1;
             this.txtEnemyS.Text = "00";
-            // 
-            // TxtRounds
-            // 
-            this.TxtRounds.AutoSize = true;
-            this.TxtRounds.BackColor = System.Drawing.Color.Transparent;
-            this.TxtRounds.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtRounds.ForeColor = System.Drawing.Color.White;
-            this.TxtRounds.Location = new System.Drawing.Point(460, 168);
-            this.TxtRounds.Name = "TxtRounds";
-            this.TxtRounds.Size = new System.Drawing.Size(163, 32);
-            this.TxtRounds.TabIndex = 2;
-            this.TxtRounds.Text = "Round : 10";
             // 
             // txtHelp
             // 
@@ -604,12 +591,11 @@ namespace Sci_fi_Battleship
             this.Controls.Add(this.btnAttack);
             this.Controls.Add(this.ELocLB);
             this.Controls.Add(this.txtHelp);
-            this.Controls.Add(this.TxtRounds);
             this.Controls.Add(this.EnemyAttack);
             this.Controls.Add(this.txtEnemyS);
             this.Controls.Add(this.txtPlayerS);
             this.Name = "Form1";
-            this.Text = "Sci-Fi Battleship V1.01";
+            this.Text = "Sci-Fi Battleship V1.02";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -619,7 +605,6 @@ namespace Sci_fi_Battleship
 
         private System.Windows.Forms.Label txtPlayerS;
         private System.Windows.Forms.Label txtEnemyS;
-        private System.Windows.Forms.Label TxtRounds;
         private System.Windows.Forms.Label txtHelp;
         private System.Windows.Forms.ComboBox ELocLB;
         private System.Windows.Forms.Button btnAttack;
