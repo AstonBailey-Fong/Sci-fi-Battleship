@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Media;
 using WMPLib;
 using System.Threading;
+using System.Timers;
 
 namespace Sci_fi_Battleship
 {
@@ -33,12 +34,17 @@ namespace Sci_fi_Battleship
         SoundPlayer enemyfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\tng_disruptor_clean.wav");
         SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\largeexplosion4.wav");
         SoundPlayer enemyhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\largeexplosion3.wav");
+        SoundPlayer miss = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\smallexplosion3.wav");
+
         public Form1()
         {
             InitializeComponent();
             background.URL = "Federation Ambient Theme.mp3";
+            background.settings.autoStart = true;
+            background.settings.setMode("loop", true);
             RestartGame();
         }
+
 
         private void txtPlayerS_Click(object sender, EventArgs e)
         {
@@ -52,6 +58,7 @@ namespace Sci_fi_Battleship
 
         private void EnemyPlayTimerEvent(object sender, EventArgs e)
         {
+            Thread.Sleep(8500);
             enemyfire.Play();
             Thread.Sleep(3000);
             if (PlayerPositionButtons.Count > 0)
@@ -67,7 +74,6 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     txtEnemyS.Text = enemyScore.ToString();
-                    Thread.Sleep(6000);
                     EnemyPlayTimer.Stop();
                 }
                 else
@@ -76,6 +82,7 @@ namespace Sci_fi_Battleship
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
                     PlayerPositionButtons[Index].Enabled = false;
                     PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    miss.Play();
                     PlayerPositionButtons.RemoveAt(Index);
                     EnemyPlayTimer.Stop();
                 }
@@ -114,7 +121,6 @@ namespace Sci_fi_Battleship
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
                 playerfire.Play();
                 Thread.Sleep(3000);
-
                 if (EnemyPositionButtons[index].Enabled)
                 {
 
@@ -123,10 +129,9 @@ namespace Sci_fi_Battleship
                         EnemyPositionButtons[index].Enabled = false;
                         EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
                         EnemyPositionButtons[index].BackColor = Color.DarkBlue;
-                        playerhit.Play();
                         playerScore += 1;
                         txtPlayerS.Text = playerScore.ToString();
-                        Thread.Sleep(10000);
+                        playerhit.Play();
                         EnemyPlayTimer.Start();
                     }
                     else
@@ -134,6 +139,7 @@ namespace Sci_fi_Battleship
                         EnemyPositionButtons[index].Enabled = false;
                         EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
                         EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                        miss.Play();
                         EnemyPlayTimer.Start();
                     }
                 }

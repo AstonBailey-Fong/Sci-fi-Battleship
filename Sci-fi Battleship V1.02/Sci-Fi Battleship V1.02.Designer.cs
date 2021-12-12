@@ -71,6 +71,7 @@ namespace Sci_fi_Battleship
             this.EnemyAttack = new System.Windows.Forms.Label();
             this.EnemyPlayTimer = new System.Windows.Forms.Timer(this.components);
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.PlayerPlayTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -658,6 +659,7 @@ namespace Sci_fi_Battleship
         private System.Windows.Forms.Label EnemyAttack;
         private System.Windows.Forms.Timer EnemyPlayTimer;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private System.Windows.Forms.Timer PlayerPlayTimer;
     }
 }
 
