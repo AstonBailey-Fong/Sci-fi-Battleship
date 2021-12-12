@@ -32,10 +32,10 @@ namespace Sci_fi_Battleship
         SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\input_failed_clean.wav");
         SoundPlayer playerfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\tng_phaser4_clean_top.wav");
         SoundPlayer enemyfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\tng_disruptor_clean.wav");
-        SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\largeexplosion4.wav");
+        SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\largeexplosion2.wav");
         SoundPlayer enemyhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\largeexplosion3.wav");
         SoundPlayer miss = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\smallexplosion3.wav");
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -58,7 +58,7 @@ namespace Sci_fi_Battleship
 
         private void EnemyPlayTimerEvent(object sender, EventArgs e)
         {
-            Thread.Sleep(8500);
+            Thread.Sleep(3000);
             enemyfire.Play();
             Thread.Sleep(3000);
             if (PlayerPositionButtons.Count > 0)
@@ -90,6 +90,7 @@ namespace Sci_fi_Battleship
             
            if (enemyScore > 2 || playerScore > 2)
             {
+                Thread.Sleep(3000);
                 background.controls.stop();
                 if (playerScore > enemyScore)
                 {
@@ -119,8 +120,16 @@ namespace Sci_fi_Battleship
             {
                 var AttackPosition = ELocLB.Text.ToLower();
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
-                playerfire.Play();
-                Thread.Sleep(3000);
+                if (((string)EnemyPositionButtons[index].Tag == "Sunk") || ((string)EnemyPositionButtons[index].Tag == "Missed"))
+                {
+                    unable.Play();
+                    MessageBox.Show("You have already attacked this position!", "Help");
+                }
+                else
+                {
+                    playerfire.Play();
+                    Thread.Sleep(3000);
+                }
                 if (EnemyPositionButtons[index].Enabled)
                 {
 
@@ -129,6 +138,7 @@ namespace Sci_fi_Battleship
                         EnemyPositionButtons[index].Enabled = false;
                         EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
                         EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                        EnemyPositionButtons[index].Tag = "Sunk";
                         playerScore += 1;
                         txtPlayerS.Text = playerScore.ToString();
                         playerhit.Play();
@@ -140,6 +150,7 @@ namespace Sci_fi_Battleship
                         EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
                         EnemyPositionButtons[index].BackColor = Color.DarkBlue;
                         miss.Play();
+                        EnemyPositionButtons[index].Tag = "Missed";
                         EnemyPlayTimer.Start();
                     }
                 }
@@ -149,9 +160,9 @@ namespace Sci_fi_Battleship
                 unable.Play();
                 MessageBox.Show("Choose a position to attack from the drop down box.", "Help");
             }
-
             if (enemyScore > 2 || playerScore > 2)
             {
+                Thread.Sleep(3000);
                 background.controls.stop();
                 if (playerScore > enemyScore)
                 {
@@ -224,6 +235,7 @@ namespace Sci_fi_Battleship
             ELocLB.Text = null;
             txtHelp.Text = "1. Click on 3 different locations above to start";
 
+
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
             {
                 EnemyPositionButtons[i].Enabled = true;
@@ -249,10 +261,10 @@ namespace Sci_fi_Battleship
             EnemyAttack.Text = "A1";
             background.controls.play();
             btnAttack.Enabled = false;
-
+            btnAttack.BackColor = Color.White;
+            btnAttack.ForeColor = Color.White;
             enemyLocationPicker();
 
         }
-
     }
 }

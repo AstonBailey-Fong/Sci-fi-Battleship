@@ -70,9 +70,7 @@ namespace Sci_fi_Battleship
             this.d2 = new System.Windows.Forms.Button();
             this.EnemyAttack = new System.Windows.Forms.Label();
             this.EnemyPlayTimer = new System.Windows.Forms.Timer(this.components);
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.PlayerPlayTimer = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPlayerS
@@ -553,15 +551,6 @@ namespace Sci_fi_Battleship
             this.EnemyPlayTimer.Interval = 1000;
             this.EnemyPlayTimer.Tick += new System.EventHandler(this.EnemyPlayTimerEvent);
             // 
-            // axWindowsMediaPlayer1
-            // 
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(424, 34);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(88, 30);
-            this.axWindowsMediaPlayer1.TabIndex = 21;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -569,7 +558,6 @@ namespace Sci_fi_Battleship
             this.BackgroundImage = global::Sci_fi_Battleship.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1062, 578);
-            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.d2);
             this.Controls.Add(this.z2);
             this.Controls.Add(this.d3);
@@ -611,7 +599,6 @@ namespace Sci_fi_Battleship
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Sci-Fi Battleship V1.02";
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -658,7 +645,6 @@ namespace Sci_fi_Battleship
         private System.Windows.Forms.Button d2;
         private System.Windows.Forms.Label EnemyAttack;
         private System.Windows.Forms.Timer EnemyPlayTimer;
-        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.Timer PlayerPlayTimer;
     }
 }
