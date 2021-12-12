@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Media;
+using WMPLib;
+using System.Threading;
 
 namespace Sci_fi_Battleship
 {
@@ -22,10 +24,19 @@ namespace Sci_fi_Battleship
         int totalShips = 3;
         int playerScore;
         int enemyScore;
-
+        WindowsMediaPlayer background = new WindowsMediaPlayer();
+        SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Stinger.wav");
+        SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Ship Lost.wav");
+        SoundPlayer select = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\keyok6.wav");
+        SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\input_failed_clean.wav");
+        SoundPlayer playerfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\tng_phaser4_clean_top.wav");
+        SoundPlayer enemyfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\tng_disruptor_clean.wav");
+        SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\largeexplosion4.wav");
+        SoundPlayer enemyhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\largeexplosion3.wav");
         public Form1()
         {
             InitializeComponent();
+            background.URL = "Federation Ambient Theme.mp3";
             RestartGame();
         }
 
@@ -41,6 +52,8 @@ namespace Sci_fi_Battleship
 
         private void EnemyPlayTimerEvent(object sender, EventArgs e)
         {
+            enemyfire.Play();
+            Thread.Sleep(3000);
             if (PlayerPositionButtons.Count > 0)
             {
                 int Index = rand.Next(PlayerPositionButtons.Count);
@@ -50,9 +63,11 @@ namespace Sci_fi_Battleship
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
                     PlayerPositionButtons[Index].Enabled = false;
                     PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    enemyhit.Play();
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     txtEnemyS.Text = enemyScore.ToString();
+                    Thread.Sleep(6000);
                     EnemyPlayTimer.Stop();
                 }
                 else
@@ -68,9 +83,7 @@ namespace Sci_fi_Battleship
             
            if (enemyScore > 2 || playerScore > 2)
             {
-                SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Stinger.wav");
-                SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Ship Lost.wav");
-
+                background.controls.stop();
                 if (playerScore > enemyScore)
                 {
                     Victory.Play();
@@ -95,11 +108,12 @@ namespace Sci_fi_Battleship
 
         private void AttackButtonEvent(object sender, EventArgs e)
         {
-            SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\input_failed_clean.wav");
             if (ELocLB.Text != "")
             {
                 var AttackPosition = ELocLB.Text.ToLower();
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                playerfire.Play();
+                Thread.Sleep(3000);
 
                 if (EnemyPositionButtons[index].Enabled)
                 {
@@ -109,8 +123,10 @@ namespace Sci_fi_Battleship
                         EnemyPositionButtons[index].Enabled = false;
                         EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
                         EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                        playerhit.Play();
                         playerScore += 1;
                         txtPlayerS.Text = playerScore.ToString();
+                        Thread.Sleep(10000);
                         EnemyPlayTimer.Start();
                     }
                     else
@@ -130,9 +146,7 @@ namespace Sci_fi_Battleship
 
             if (enemyScore > 2 || playerScore > 2)
             {
-                SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Stinger.wav");
-                SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\Star Trek Legacy - Federation Ship Lost.wav");
-
+                background.controls.stop();
                 if (playerScore > enemyScore)
                 {
                     Victory.Play();
@@ -158,7 +172,6 @@ namespace Sci_fi_Battleship
 
         private void PlayerPositonEvent(object sender, EventArgs e)
         {
-            SoundPlayer select = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.02\Resources\keyok6.wav");
             if (totalShips > 0)
             {
                 var button = (Button)sender;
@@ -228,7 +241,7 @@ namespace Sci_fi_Battleship
             txtPlayerS.Text = playerScore.ToString();
             txtEnemyS.Text = enemyScore.ToString();
             EnemyAttack.Text = "A1";
-
+            background.controls.play();
             btnAttack.Enabled = false;
 
             enemyLocationPicker();
