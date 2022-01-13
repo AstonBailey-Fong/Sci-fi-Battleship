@@ -34,7 +34,6 @@ namespace Sci_fi_Battleship
             this.txtPlayerS = new System.Windows.Forms.Label();
             this.txtEnemyS = new System.Windows.Forms.Label();
             this.txtHelp = new System.Windows.Forms.Label();
-            this.ELocLB = new System.Windows.Forms.ComboBox();
             this.btnAttack = new System.Windows.Forms.Button();
             this.w1 = new System.Windows.Forms.Button();
             this.w4 = new System.Windows.Forms.Button();
@@ -70,7 +69,7 @@ namespace Sci_fi_Battleship
             this.d2 = new System.Windows.Forms.Button();
             this.EnemyAttack = new System.Windows.Forms.Label();
             this.EnemyPlayTimer = new System.Windows.Forms.Timer(this.components);
-            this.PlayerPlayTimer = new System.Windows.Forms.Timer(this.components);
+            this.EnemyLocation = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtPlayerS
@@ -110,18 +109,6 @@ namespace Sci_fi_Battleship
             this.txtHelp.TabIndex = 2;
             this.txtHelp.Text = "1. Click on 3 different locations above to start";
             this.txtHelp.Click += new System.EventHandler(this.txtHelp_Click);
-            // 
-            // ELocLB
-            // 
-            this.ELocLB.BackColor = System.Drawing.Color.PaleGreen;
-            this.ELocLB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ELocLB.DropDownWidth = 95;
-            this.ELocLB.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ELocLB.FormattingEnabled = true;
-            this.ELocLB.Location = new System.Drawing.Point(175, 23);
-            this.ELocLB.Name = "ELocLB";
-            this.ELocLB.Size = new System.Drawing.Size(107, 39);
-            this.ELocLB.TabIndex = 3;
             // 
             // btnAttack
             // 
@@ -353,6 +340,7 @@ namespace Sci_fi_Battleship
             this.a1.TabIndex = 5;
             this.a1.Text = "A1";
             this.a1.UseVisualStyleBackColor = false;
+            this.a1.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // a4
             // 
@@ -365,6 +353,7 @@ namespace Sci_fi_Battleship
             this.a4.TabIndex = 6;
             this.a4.Text = "A4";
             this.a4.UseVisualStyleBackColor = false;
+            this.a4.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // a3
             // 
@@ -377,6 +366,7 @@ namespace Sci_fi_Battleship
             this.a3.TabIndex = 7;
             this.a3.Text = "A3";
             this.a3.UseVisualStyleBackColor = false;
+            this.a3.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // a2
             // 
@@ -389,6 +379,7 @@ namespace Sci_fi_Battleship
             this.a2.TabIndex = 8;
             this.a2.Text = "A2";
             this.a2.UseVisualStyleBackColor = false;
+            this.a2.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // b1
             // 
@@ -401,6 +392,7 @@ namespace Sci_fi_Battleship
             this.b1.TabIndex = 9;
             this.b1.Text = "B1";
             this.b1.UseVisualStyleBackColor = false;
+            this.b1.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // b4
             // 
@@ -413,6 +405,7 @@ namespace Sci_fi_Battleship
             this.b4.TabIndex = 10;
             this.b4.Text = "B4";
             this.b4.UseVisualStyleBackColor = false;
+            this.b4.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // b3
             // 
@@ -425,6 +418,7 @@ namespace Sci_fi_Battleship
             this.b3.TabIndex = 11;
             this.b3.Text = "B3";
             this.b3.UseVisualStyleBackColor = false;
+            this.b3.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // b2
             // 
@@ -437,6 +431,7 @@ namespace Sci_fi_Battleship
             this.b2.TabIndex = 12;
             this.b2.Text = "B2";
             this.b2.UseVisualStyleBackColor = false;
+            this.b2.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // c1
             // 
@@ -449,6 +444,7 @@ namespace Sci_fi_Battleship
             this.c1.TabIndex = 13;
             this.c1.Text = "C1";
             this.c1.UseVisualStyleBackColor = false;
+            this.c1.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // c4
             // 
@@ -461,6 +457,7 @@ namespace Sci_fi_Battleship
             this.c4.TabIndex = 14;
             this.c4.Text = "C4";
             this.c4.UseVisualStyleBackColor = false;
+            this.c4.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // c3
             // 
@@ -473,6 +470,7 @@ namespace Sci_fi_Battleship
             this.c3.TabIndex = 15;
             this.c3.Text = "C3";
             this.c3.UseVisualStyleBackColor = false;
+            this.c3.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // c2
             // 
@@ -485,6 +483,7 @@ namespace Sci_fi_Battleship
             this.c2.TabIndex = 16;
             this.c2.Text = "C2";
             this.c2.UseVisualStyleBackColor = false;
+            this.c2.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // d1
             // 
@@ -497,6 +496,7 @@ namespace Sci_fi_Battleship
             this.d1.TabIndex = 17;
             this.d1.Text = "D1";
             this.d1.UseVisualStyleBackColor = false;
+            this.d1.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // d4
             // 
@@ -509,6 +509,7 @@ namespace Sci_fi_Battleship
             this.d4.TabIndex = 18;
             this.d4.Text = "D4";
             this.d4.UseVisualStyleBackColor = false;
+            this.d4.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // d3
             // 
@@ -521,6 +522,7 @@ namespace Sci_fi_Battleship
             this.d3.TabIndex = 19;
             this.d3.Text = "D3";
             this.d3.UseVisualStyleBackColor = false;
+            this.d3.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // d2
             // 
@@ -533,6 +535,7 @@ namespace Sci_fi_Battleship
             this.d2.TabIndex = 20;
             this.d2.Text = "D2";
             this.d2.UseVisualStyleBackColor = false;
+            this.d2.Click += new System.EventHandler(this.AttackSelectionEvent);
             // 
             // EnemyAttack
             // 
@@ -551,6 +554,18 @@ namespace Sci_fi_Battleship
             this.EnemyPlayTimer.Interval = 1000;
             this.EnemyPlayTimer.Tick += new System.EventHandler(this.EnemyPlayTimerEvent);
             // 
+            // EnemyLocation
+            // 
+            this.EnemyLocation.AutoSize = true;
+            this.EnemyLocation.BackColor = System.Drawing.Color.Transparent;
+            this.EnemyLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnemyLocation.ForeColor = System.Drawing.Color.White;
+            this.EnemyLocation.Location = new System.Drawing.Point(184, 32);
+            this.EnemyLocation.Name = "EnemyLocation";
+            this.EnemyLocation.Size = new System.Drawing.Size(92, 32);
+            this.EnemyLocation.TabIndex = 21;
+            this.EnemyLocation.Text = "Blank";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -558,6 +573,7 @@ namespace Sci_fi_Battleship
             this.BackgroundImage = global::Sci_fi_Battleship.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1062, 578);
+            this.Controls.Add(this.EnemyLocation);
             this.Controls.Add(this.d2);
             this.Controls.Add(this.z2);
             this.Controls.Add(this.d3);
@@ -591,7 +607,6 @@ namespace Sci_fi_Battleship
             this.Controls.Add(this.w4);
             this.Controls.Add(this.w1);
             this.Controls.Add(this.btnAttack);
-            this.Controls.Add(this.ELocLB);
             this.Controls.Add(this.txtHelp);
             this.Controls.Add(this.EnemyAttack);
             this.Controls.Add(this.txtEnemyS);
@@ -609,7 +624,6 @@ namespace Sci_fi_Battleship
         private System.Windows.Forms.Label txtPlayerS;
         private System.Windows.Forms.Label txtEnemyS;
         private System.Windows.Forms.Label txtHelp;
-        private System.Windows.Forms.ComboBox ELocLB;
         private System.Windows.Forms.Button btnAttack;
         private System.Windows.Forms.Button w1;
         private System.Windows.Forms.Button w4;
@@ -645,7 +659,7 @@ namespace Sci_fi_Battleship
         private System.Windows.Forms.Button d2;
         private System.Windows.Forms.Label EnemyAttack;
         private System.Windows.Forms.Timer EnemyPlayTimer;
-        private System.Windows.Forms.Timer PlayerPlayTimer;
+        private System.Windows.Forms.Label EnemyLocation;
     }
 }
 

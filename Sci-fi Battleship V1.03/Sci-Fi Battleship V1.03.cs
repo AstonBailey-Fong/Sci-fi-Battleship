@@ -25,6 +25,8 @@ namespace Sci_fi_Battleship
         int totalShips = 3;
         int playerScore;
         int enemyScore;
+        int shots = 0;
+        bool targeted = false;
         WindowsMediaPlayer background = new WindowsMediaPlayer();
         SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Stinger.wav");
         SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Ship Lost.wav");
@@ -116,9 +118,10 @@ namespace Sci_fi_Battleship
 
         private void AttackButtonEvent(object sender, EventArgs e)
         {
-            if (ELocLB.Text != "")
+            if (EnemyLocation.Text != "Blank")
             {
-                var AttackPosition = ELocLB.Text.ToLower();
+                var AttackPosition = EnemyLocation.Text.ToLower();
+                shots = 0;
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
                 if (((string)EnemyPositionButtons[index].Tag == "Sunk") || ((string)EnemyPositionButtons[index].Tag == "Missed"))
                 {
@@ -143,6 +146,8 @@ namespace Sci_fi_Battleship
                         txtPlayerS.Text = playerScore.ToString();
                         playerhit.Play();
                         EnemyPlayTimer.Start();
+                        btnAttack.BackColor = Color.White;
+                        btnAttack.ForeColor = Color.Black;
                     }
                     else
                     {
@@ -152,6 +157,8 @@ namespace Sci_fi_Battleship
                         miss.Play();
                         EnemyPositionButtons[index].Tag = "Missed";
                         EnemyPlayTimer.Start();
+                        btnAttack.BackColor = Color.White;
+                        btnAttack.ForeColor = Color.Black;
                     }
                 }
             }
@@ -200,8 +207,6 @@ namespace Sci_fi_Battleship
                 if (totalShips == 0)
                 {
                     btnAttack.Enabled = true;
-                    btnAttack.BackColor = Color.Red;
-                    btnAttack.ForeColor = Color.White;
                     txtHelp.Text = "2. Pick a positon to attack from the drop down box.";
                 }
 
@@ -229,10 +234,6 @@ namespace Sci_fi_Battleship
         {
             PlayerPositionButtons = new List<Button> { w1, w2, w3, w4, x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4 };
             EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4 };
-
-            ELocLB.Items.Clear();
-
-            ELocLB.Text = null;
             txtHelp.Text = "1. Click on 3 different locations above to start";
 
 
@@ -242,7 +243,6 @@ namespace Sci_fi_Battleship
                 EnemyPositionButtons[i].Tag = null;
                 EnemyPositionButtons[i].BackColor = Color.White;
                 EnemyPositionButtons[i].BackgroundImage = null;
-                ELocLB.Items.Add(EnemyPositionButtons[i].Text);
 
             }
 
@@ -256,14 +256,39 @@ namespace Sci_fi_Battleship
             playerScore = 0;
             enemyScore = 0;
             totalShips = 3;
+            shots = 0;
+            targeted = false;
             txtPlayerS.Text = playerScore.ToString();
             txtEnemyS.Text = enemyScore.ToString();
             EnemyAttack.Text = "A1";
             background.controls.play();
             btnAttack.Enabled = false;
             btnAttack.BackColor = Color.White;
-            btnAttack.ForeColor = Color.White;
+            btnAttack.ForeColor = Color.Black;
             enemyLocationPicker();
+
+        }
+
+        private void AttackSelectionEvent(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            select.Play();
+            int Index = EnemyPositionButtons.Count;
+            if (shots > 0) 
+            {
+                unable.Play();
+                MessageBox.Show("You cannot make another choice until your next turn.", "Help");
+            }
+            else
+            {
+                
+                EnemyLocation.Text = button.Text;
+                button.BackgroundImage = Properties.Resources.target;
+                shots = 1;
+                targeted = true;
+                btnAttack.BackColor = Color.Red;
+                btnAttack.ForeColor = Color.White;
+            }
 
         }
     }

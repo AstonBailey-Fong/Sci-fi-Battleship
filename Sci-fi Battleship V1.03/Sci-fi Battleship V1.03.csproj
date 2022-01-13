@@ -7,7 +7,7 @@
     <ProjectGuid>{8C3A02B1-D4C9-49E7-AAD7-99A1A3EAE8A2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Sci_fi_Battleship</RootNamespace>
-    <AssemblyName>Sci-fi Battleship V1.02</AssemblyName>
+    <AssemblyName>Sci-fi Battleship V1.03</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -108,6 +108,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Target.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\target.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
