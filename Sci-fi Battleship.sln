@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.02", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.03", "Sci-fi Battleship V1.03\Sci-fi Battleship V1.03.csproj", "{8C3A02B1-D4C9-49E7-AAD7-99A1A3EAE8A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.04", "Sci-fi Battleship V1.04\Sci-fi Battleship V1.04.csproj", "{9F6D08BA-FC40-4420-9F5F-28E4A3C18C20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8C3A02B1-D4C9-49E7-AAD7-99A1A3EAE8A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C3A02B1-D4C9-49E7-AAD7-99A1A3EAE8A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C3A02B1-D4C9-49E7-AAD7-99A1A3EAE8A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F6D08BA-FC40-4420-9F5F-28E4A3C18C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F6D08BA-FC40-4420-9F5F-28E4A3C18C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F6D08BA-FC40-4420-9F5F-28E4A3C18C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F6D08BA-FC40-4420-9F5F-28E4A3C18C20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
