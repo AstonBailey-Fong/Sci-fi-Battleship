@@ -76,7 +76,6 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     txtEnemyS.Text = enemyScore.ToString();
-                    EnemyPlayTimer.Stop();
                 }
                 else
                 {
@@ -93,6 +92,7 @@ namespace Sci_fi_Battleship
            if (enemyScore > 2 || playerScore > 2)
             {
                 Thread.Sleep(3000);
+                EnemyPlayTimer.Stop();
                 background.controls.stop();
                 if (playerScore > enemyScore)
                 {
@@ -145,7 +145,6 @@ namespace Sci_fi_Battleship
                         playerScore += 1;
                         txtPlayerS.Text = playerScore.ToString();
                         playerhit.Play();
-                        EnemyPlayTimer.Start();
                         btnAttack.BackColor = Color.White;
                         btnAttack.ForeColor = Color.Black;
                     }
