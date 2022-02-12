@@ -20,9 +20,20 @@ namespace Sci_fi_Battleship
 
         List<Button> PlayerPositionButtons;
         List<Button> EnemyPositionButtons;
+        List<Button> PlayerSelectionButtons;
 
         Random rand = new Random();
-        int totalShips = 3;
+        int totalShips = 5;
+        int pcarrier = 0;
+        int pbattleship = 0;
+        int pcruiser = 0;
+        int pdestroyer = 0;
+        int pscout = 0;
+        int ecarrier = 0;
+        int ebattleship = 0;
+        int ecruiser = 0;
+        int edestroyer = 0;
+        int escout = 0;
         int playerScore;
         int enemyScore;
         int shots = 0;
@@ -66,7 +77,7 @@ namespace Sci_fi_Battleship
             if (PlayerPositionButtons.Count > 0)
             {
                 int Index = rand.Next(PlayerPositionButtons.Count);
-                if ((string)PlayerPositionButtons[Index].Tag == "Player Ship")
+                if ((string)PlayerPositionButtons[Index].Tag == "Player Carrier" || (string)PlayerPositionButtons[Index].Tag == "Player Battleship" || (string)PlayerPositionButtons[Index].Tag == "Player Cruiser" || (string)PlayerPositionButtons[Index].Tag == "Player Destroyer" || (string)PlayerPositionButtons[Index].Tag == "Player Scout")
                 {
                     PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
@@ -88,7 +99,7 @@ namespace Sci_fi_Battleship
                 }
             }
             
-           if (enemyScore > 2 || playerScore > 2)
+           if (enemyScore > 4 || playerScore > 4)
             {
                 Thread.Sleep(3000);
                 EnemyPlayTimer.Stop();
@@ -164,7 +175,7 @@ namespace Sci_fi_Battleship
                 unable.Play();
                 MessageBox.Show("Choose a position to attack from the drop down box.", "Help");
             }
-            if (enemyScore > 2 || playerScore > 2)
+            if (enemyScore > 4 || playerScore > 4)
             {
                 Thread.Sleep(3000);
                 background.controls.stop();
@@ -193,26 +204,12 @@ namespace Sci_fi_Battleship
 
         private void PlayerPositonEvent(object sender, EventArgs e)
         {
-            if (totalShips > 0)
-            {
-                var button = (Button)sender;
-                select.Play();
-                button.Enabled = false;
-                button.Tag = "Player Ship";
-                button.BackColor = Color.Orange;
-                totalShips -= 1;
-                if (totalShips == 0)
-                {
-                    btnAttack.Enabled = true;
-                    txtHelp.Text = "2. Pick a positon to attack from the drop down box.";
-                }
 
-            }
         }
 
         private void enemyLocationPicker()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int index = rand.Next(EnemyPositionButtons.Count);
                 if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
@@ -231,7 +228,8 @@ namespace Sci_fi_Battleship
         {
             PlayerPositionButtons = new List<Button> { u1, u2, u3, u4, u5, u6, v1, v2, v3, v4, v5, v6, w1, w2, w3, w4, w5, w6, x1, x2, x3, x4, x5, x6, y1, y2, y3, y4, y5, y6, z1, z2, z3, z4, z5, z6};
             EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, b1, b2, b3, b4, b5, b6, c1, c2, c3, c4, c5, c6, d1, d2, d3, d4, d5, d6, e1, e2, e3, e4, e5, e6, f1, f2, f3, f4, f5, f6 };
-            txtHelp.Text = "1. Click on 3 different locations above to start";
+            PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
+            txtHelp.Text = "1. Click on 5 different locations above to start";
 
 
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
@@ -250,9 +248,23 @@ namespace Sci_fi_Battleship
                 PlayerPositionButtons[i].BackColor = Color.White;
                 PlayerPositionButtons[i].BackgroundImage = null;
             }
+            for (int i = 0; i < PlayerSelectionButtons.Count; i++)
+            {
+                PlayerSelectionButtons[i].Enabled = true;
+            }
             playerScore = 0;
             enemyScore = 0;
-            totalShips = 3;
+            totalShips = 5;
+            pcarrier = 0;
+            pbattleship = 0;
+            pcruiser = 0;
+            pdestroyer = 0;
+            pscout = 0;
+            ecarrier = 1;
+            ebattleship = 0;
+            ecruiser = 0;
+            edestroyer = 0;
+            escout = 0;
             shots = 0;
             targeted = false;
             EnemyAttack.Text = "A1";
@@ -273,6 +285,7 @@ namespace Sci_fi_Battleship
             {
                 unable.Play();
                 MessageBox.Show("You cannot make another choice until your next turn.", "Help");
+
             }
             else
             {
@@ -284,7 +297,6 @@ namespace Sci_fi_Battleship
                 btnAttack.BackColor = Color.Red;
                 btnAttack.ForeColor = Color.White;
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -292,184 +304,141 @@ namespace Sci_fi_Battleship
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void PlayerPositionEvent(object sender, EventArgs e)
+        {
+            if (totalShips > 0 )
+            {
+                if (pcarrier > 0)
+                {
+                    var button = (Button)sender;
+                    select.Play();
+                    button.Enabled = false;
+                    button.Tag = "Player Carrier";
+                    button.BackgroundImage = Properties.Resources.FedCarrier;
+                    totalShips -= 1;
+                    pcarrier -= 1;
+                }
+                if (pbattleship > 0)
+                {
+                    var button = (Button)sender;
+                    select.Play();
+                    button.Enabled = false;
+                    button.Tag = "Player Battleship";
+                    button.BackgroundImage = Properties.Resources.FedBattleship;
+                    totalShips -= 1;
+                    pbattleship -= 1;
+                }
+                if (pcruiser > 0)
+                {
+                    var button = (Button)sender;
+                    select.Play();
+                    button.Enabled = false;
+                    button.Tag = "Player Cruiser";
+                    button.BackgroundImage = Properties.Resources.FedCruiser;
+                    totalShips -= 1;
+                    pcruiser -= 1;
+                }
+                if (pdestroyer > 0)
+                {
+                    var button = (Button)sender;
+                    select.Play();
+                    button.Enabled = false;
+                    button.Tag = "Player Destroyer";
+                    button.BackgroundImage = Properties.Resources.FedDestroyer;
+                    totalShips -= 1;
+                    pdestroyer -= 1;
+                }
+                if (pscout > 0)
+                {
+                    var button = (Button)sender;
+                    select.Play();
+                    button.Enabled = false;
+                    button.Tag = "Player Scout";
+                    button.BackgroundImage = Properties.Resources.FedScout;
+                    totalShips -= 1;
+                    pscout -= 1;
+                }
+                //var button = (Button)sender;
+                //select.Play();
+                //button.Enabled = false;
+                //button.Tag = "Player Ship";
+                //button.BackColor = Color.Orange;
+                //totalShips -= 1;
+                if (totalShips == 0)
+                {
+                    btnAttack.Enabled = true;
+                    txtHelp.Text = "2. Select a position to attack from the enemy's board.";
+                }
+
+            }
+        }
+
+        private void ShipSelect(object sender, EventArgs e)
+        {
+            select.Play();
+            var sbutton = (Button)sender;
+            sbutton.BackColor = Color.Orange;
+
+        }
+
+        private void Ship2ASelect(object sender, EventArgs e)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Ship2BSelect(object sender, EventArgs e)
         {
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Ship1Select(object sender, EventArgs e)
         {
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Deselectattack(object sender, EventArgs e)
         {
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void BattleshipSelect(object sender, EventArgs e)
         {
-
+            select.Play();
+            var sbutton = (Button)sender;
+            sbutton.Enabled = false;
+            pbattleship += 1;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CruiserSelect(object sender, EventArgs e)
         {
-
+            select.Play();
+            var sbutton = (Button)sender;
+            sbutton.Enabled = false;
+            pcruiser += 1;
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void CarrierSelect(object sender, EventArgs e)
         {
-
+            select.Play();
+            var sbutton = (Button)sender;
+            sbutton.Enabled = false;
+            pcarrier += 1;
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void DestroyerSelect(object sender, EventArgs e)
         {
-
+            select.Play();
+            var sbutton = (Button)sender;
+            sbutton.Enabled = false;
+            pdestroyer += 1;
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void ScoutSelect(object sender, EventArgs e)
         {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-
+            select.Play();
+            var sbutton = (Button)sender;
+            sbutton.Enabled = false;
+            pscout += 1;
         }
     }
 }
