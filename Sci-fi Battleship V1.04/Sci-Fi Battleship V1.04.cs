@@ -21,6 +21,7 @@ namespace Sci_fi_Battleship
         List<Button> PlayerPositionButtons;
         List<Button> EnemyPositionButtons;
         List<Button> PlayerSelectionButtons;
+        String[] EnemyShipClasses = {  "Enemy Carrier", "Enemy Battleship", "Enemy Cruiser", "Enemy Destroyer", "Enemy Scout"};
 
         Random rand = new Random();
         int totalShips = 5;
@@ -38,6 +39,12 @@ namespace Sci_fi_Battleship
         int enemyScore;
         int shots = 0;
         bool targeted = false;
+        int carrierspecial = 5;
+        int battleshipspecial = 4;
+        int cruiserspecial = 3;
+        int destroyerspecial = 2;
+        int scoutspecial = 1;
+
         WindowsMediaPlayer background = new WindowsMediaPlayer();
         SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Stinger.wav");
         SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Ship Lost.wav");
@@ -146,7 +153,7 @@ namespace Sci_fi_Battleship
                 if (EnemyPositionButtons[index].Enabled)
                 {
 
-                    if ((string)EnemyPositionButtons[index].Tag == "Enemy Ship")
+                    if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
                     {
                         EnemyPositionButtons[index].Enabled = false;
                         EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
@@ -209,13 +216,15 @@ namespace Sci_fi_Battleship
 
         private void enemyLocationPicker()
         {
+            int j = 0;
             for (int i = 0; i < 5; i++)
             {
                 int index = rand.Next(EnemyPositionButtons.Count);
                 if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
                 {
-                    EnemyPositionButtons[index].Tag = "Enemy Ship";
-                    Debug.WriteLine("Enemy Position: " + EnemyPositionButtons[index].Text);
+                    EnemyPositionButtons[index].Tag = EnemyShipClasses[j];
+                    Debug.WriteLine(EnemyShipClasses[j] + " Position: " + EnemyPositionButtons[index].Text);
+                    j += 1;
                 }
                 else
                 {
@@ -226,6 +235,7 @@ namespace Sci_fi_Battleship
 
         private void RestartGame()
         {
+            string[] EnemyShipClasses = {  "Enemy Carrier", "Enemy Battleship", "Enemy Cruiser", "Enemy Destroyer", "Enemy Scout"};
             PlayerPositionButtons = new List<Button> { u1, u2, u3, u4, u5, u6, v1, v2, v3, v4, v5, v6, w1, w2, w3, w4, w5, w6, x1, x2, x3, x4, x5, x6, y1, y2, y3, y4, y5, y6, z1, z2, z3, z4, z5, z6};
             EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, b1, b2, b3, b4, b5, b6, c1, c2, c3, c4, c5, c6, d1, d2, d3, d4, d5, d6, e1, e2, e3, e4, e5, e6, f1, f2, f3, f4, f5, f6 };
             PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
