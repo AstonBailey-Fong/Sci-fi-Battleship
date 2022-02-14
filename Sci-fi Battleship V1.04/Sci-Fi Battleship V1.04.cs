@@ -180,7 +180,7 @@ namespace Sci_fi_Battleship
             else
             {
                 unable.Play();
-                MessageBox.Show("Choose a position to attack from the drop down box.", "Help");
+                MessageBox.Show("Choose a position to attack from the enemy's board.", "Help");
             }
             if (enemyScore > 4 || playerScore > 4)
             {
@@ -231,6 +231,20 @@ namespace Sci_fi_Battleship
                     index = rand.Next(EnemyPositionButtons.Count);
                 }
             }
+            if (j < 5)
+            {
+                int index = rand.Next(EnemyPositionButtons.Count);
+                if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
+                {
+                    EnemyPositionButtons[index].Tag = EnemyShipClasses[j];
+                    Debug.WriteLine(EnemyShipClasses[j] + " Position: " + EnemyPositionButtons[index].Text);
+                    j += 1;
+                }
+                else
+                {
+                    index = rand.Next(EnemyPositionButtons.Count);
+                }
+            }
         }
 
         private void RestartGame()
@@ -239,7 +253,7 @@ namespace Sci_fi_Battleship
             PlayerPositionButtons = new List<Button> { u1, u2, u3, u4, u5, u6, v1, v2, v3, v4, v5, v6, w1, w2, w3, w4, w5, w6, x1, x2, x3, x4, x5, x6, y1, y2, y3, y4, y5, y6, z1, z2, z3, z4, z5, z6};
             EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, b1, b2, b3, b4, b5, b6, c1, c2, c3, c4, c5, c6, d1, d2, d3, d4, d5, d6, e1, e2, e3, e4, e5, e6, f1, f2, f3, f4, f5, f6 };
             PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
-            txtHelp.Text = "1. Click on 5 different locations above to start";
+            txtHelp.Text = "1. Selct the ship you want to place down, then select where you want it to go on the board.";
 
 
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
@@ -368,12 +382,6 @@ namespace Sci_fi_Battleship
                     totalShips -= 1;
                     pscout -= 1;
                 }
-                //var button = (Button)sender;
-                //select.Play();
-                //button.Enabled = false;
-                //button.Tag = "Player Ship";
-                //button.BackColor = Color.Orange;
-                //totalShips -= 1;
                 if (totalShips == 0)
                 {
                     btnAttack.Enabled = true;
