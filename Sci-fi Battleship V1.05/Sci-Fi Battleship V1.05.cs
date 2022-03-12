@@ -12,6 +12,7 @@ using System.Media;
 using WMPLib;
 using System.Threading;
 using System.Timers;
+using Microsoft.VisualBasic;
 
 namespace Sci_fi_Battleship
 {
@@ -22,6 +23,7 @@ namespace Sci_fi_Battleship
         List<Button> EnemyPositionButtons;
         List<Button> PlayerSelectionButtons;
         String[] EnemyShipClasses = {  "Enemy Carrier", "Enemy Battleship", "Enemy Cruiser", "Enemy Destroyer", "Enemy Scout"};
+        String[] tspreadtargets = { "Blank", "Blank", "Blank" };
 
         Random rand = new Random();
         int totalShips = 5;
@@ -38,12 +40,17 @@ namespace Sci_fi_Battleship
         int playerScore;
         int enemyScore;
         int shots = 0;
+        int crshots = 0;
         bool targeted = false;
         int carrierspecial = 5;
         int battleshipspecial = 4;
         int cruiserspecial = 3;
         int destroyerspecial = 2;
         int scoutspecial = 1;
+        bool crspecial = false;
+        string AttackPosition;
+        int torpspread = 0;
+        bool caspecial = false;
 
         WindowsMediaPlayer background = new WindowsMediaPlayer();
         SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Stinger.wav");
@@ -55,7 +62,7 @@ namespace Sci_fi_Battleship
         SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion2.wav");
         SoundPlayer enemyhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion3.wav");
         SoundPlayer miss = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\smallexplosion3.wav");
-        
+        SoundPlayer cruiserfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\quantumtorpedoes.wav");
         public Form1()
         {
             InitializeComponent();
@@ -64,7 +71,6 @@ namespace Sci_fi_Battleship
             background.settings.setMode("loop", true);
             RestartGame();
         }
-
 
         private void txtPlayerS_Click(object sender, EventArgs e)
         {
@@ -81,6 +87,8 @@ namespace Sci_fi_Battleship
             Thread.Sleep(3000);
             enemyfire.Play();
             Thread.Sleep(3000);
+            crspecial = false;
+            crshots = 0;
             if (PlayerPositionButtons.Count > 0)
             {
                 int Index = rand.Next(PlayerPositionButtons.Count);
@@ -137,50 +145,102 @@ namespace Sci_fi_Battleship
         {
             if (EnemyLocation.Text != "Blank")
             {
-                var AttackPosition = EnemyLocation.Text.ToLower();
+                AttackPosition = EnemyLocation.Text.ToLower();
                 shots = 0;
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
-                if (((string)EnemyPositionButtons[index].Tag == "Sunk") || ((string)EnemyPositionButtons[index].Tag == "Missed"))
+                if (crspecial == true)
                 {
-                    unable.Play();
-                    MessageBox.Show("You have already attacked this position!", "Help");
-                }
-                else
-                {
-                    playerfire.Play();
-                    Thread.Sleep(3000);
-                }
-                if (EnemyPositionButtons[index].Enabled)
-                {
-
-                    if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                    do
                     {
-                        EnemyPositionButtons[index].Enabled = false;
-                        EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
-                        EnemyPositionButtons[index].BackColor = Color.DarkBlue;
-                        EnemyPositionButtons[index].Tag = "Sunk";
-                        playerScore += 1;
-                        playerhit.Play();
-                        btnAttack.BackColor = Color.White;
-                        btnAttack.ForeColor = Color.Black;
+                        AttackPosition = tspreadtargets[torpspread].ToLower();
+                        shots = 0;
+                        index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                        cruiserfire.Play();
+                        Thread.Sleep(3000);
+                        if (EnemyPositionButtons[index].Enabled)
+                        {
+
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                            {
+                                EnemyPositionButtons[index].Enabled = false;
+                                EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
+                                EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                                EnemyPositionButtons[index].Tag = "Sunk";
+                                playerScore += 1;
+                                playerhit.Play();
+                                btnAttack.BackColor = Color.White;
+                                btnAttack.ForeColor = Color.Black;
+                                if (crspecial == true && torpspread < 3)
+                                {
+                                    torpspread += 1;
+                                    Thread.Sleep(3000);
+                                }
+
+                            }
+                            else
+                            {
+                                EnemyPositionButtons[index].Enabled = false;
+                                EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
+                                EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                                miss.Play();
+                                EnemyPositionButtons[index].Tag = "Missed";
+                                btnAttack.BackColor = Color.White;
+                                btnAttack.ForeColor = Color.Black;
+                                if (crspecial == true && torpspread < 3)
+                                {
+                                    torpspread += 1;
+                                    Thread.Sleep(3000);
+                                }
+                            }
+                        }
+                    } while (torpspread < 3);
+                    if (torpspread == 3)
+                    {
+                        EnemyPlayTimer.Start();
+                    }
+                }
+                if (crspecial != true)
+                {
+                    if (((string)EnemyPositionButtons[index].Tag == "Sunk") || ((string)EnemyPositionButtons[index].Tag == "Missed"))
+                    {
+                        unable.Play();
+                        MessageBox.Show("You have already attacked this position!", "Help");
                     }
                     else
                     {
-                        EnemyPositionButtons[index].Enabled = false;
-                        EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
-                        EnemyPositionButtons[index].BackColor = Color.DarkBlue;
-                        miss.Play();
-                        EnemyPositionButtons[index].Tag = "Missed";
-                        EnemyPlayTimer.Start();
-                        btnAttack.BackColor = Color.White;
-                        btnAttack.ForeColor = Color.Black;
+                        unable.Play();
+                        MessageBox.Show("Choose a position to attack from the enemy's board.", "Help");
                     }
+                    playerfire.Play();
+                    Thread.Sleep(3000);
+                    if (EnemyPositionButtons[index].Enabled)
+                    {
+
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                        {
+                            EnemyPositionButtons[index].Enabled = false;
+                            EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
+                            EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                            EnemyPositionButtons[index].Tag = "Sunk";
+                            playerScore += 1;
+                            playerhit.Play();
+                            btnAttack.BackColor = Color.White;
+                            btnAttack.ForeColor = Color.Black;
+                        }
+                        else
+                        {
+                            EnemyPositionButtons[index].Enabled = false;
+                            EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
+                            EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                            miss.Play();
+                            EnemyPositionButtons[index].Tag = "Missed";
+                            EnemyPlayTimer.Start();
+                            btnAttack.BackColor = Color.White;
+                            btnAttack.ForeColor = Color.Black;
+                        }
+                    }
+
                 }
-            }
-            else
-            {
-                unable.Play();
-                MessageBox.Show("Choose a position to attack from the enemy's board.", "Help");
             }
             if (enemyScore > 4 || playerScore > 4)
             {
@@ -321,10 +381,19 @@ namespace Sci_fi_Battleship
                 
                 EnemyLocation.Text = button.Text;
                 button.BackgroundImage = Properties.Resources.target;
-                shots = 1;
+                shots += 1;
                 targeted = true;
-                btnAttack.BackColor = Color.Red;
-                btnAttack.ForeColor = Color.White;
+                if (shots == 1)
+                {
+                    btnAttack.BackColor = Color.Red;
+                    btnAttack.ForeColor = Color.White;
+                }
+                if (crspecial == true && crshots < 3)
+                {
+                    tspreadtargets[crshots] = EnemyLocation.Text;
+                    crshots += 1;
+                }
+
             }
         }
 
@@ -467,6 +536,39 @@ namespace Sci_fi_Battleship
         private void EnemyLocation_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CruiserSpecial(object sender, EventArgs e)
+        {
+            select.Play();
+            crspecial = true;
+            shots = -2;
+
+        }
+
+        private void Carrierspecial(object sender, EventArgs e)
+        {
+            unable.Play();
+            MessageBox.Show("This feature has not been programmed in yet.", "Help");
+        }
+    
+
+        private void Battleshipspecial(object sender, EventArgs e)
+        {
+            unable.Play();
+            MessageBox.Show("This feature has not been programmed in yet.", "Help");
+        }
+
+        private void Destroyerspecial(object sender, EventArgs e)
+        {
+            unable.Play();
+            MessageBox.Show("This feature has not been programmed in yet.", "Help");
+        }
+
+        private void Scoutspecial(object sender, EventArgs e)
+        {
+            unable.Play();
+            MessageBox.Show("This feature has not been programmed in yet.", "Help");
         }
     }
 }
