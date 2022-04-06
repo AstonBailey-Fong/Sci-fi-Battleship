@@ -22,9 +22,13 @@ namespace Sci_fi_Battleship
         List<Button> PlayerPositionButtons;
         List<Button> EnemyPositionButtons;
         List<Button> PlayerSelectionButtons;
+        List<Button> SpecialAbilityButtons;
         String[] EnemyShipClasses = {  "Enemy Carrier", "Enemy Battleship", "Enemy Cruiser", "Enemy Destroyer", "Enemy Scout"};
         String[] tspreadtargets = { "Blank", "Blank", "Blank" };
-
+        String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
+        String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank"};
+        String[] EnemyShipPositions = { "Blank", "Blank", "Blank", "Blank", "Blank" };
+        String[] EnemyPositions = { "A1", "A2", "A3" , "A4", "A5", "A6", "B1", "B2", "B3", "B4", "B5", "B6", "C1", "C2", "C3", "C4", "C5", "C6", "D1", "D2", "D3", "D4", "D5", "D6", "E1", "E2", "E3", "E4", "E5", "E6", "F1", "F2", "F3", "F4", "F5", "F6"};
         Random rand = new Random();
         int totalShips = 5;
         int pcarrier = 0;
@@ -32,11 +36,6 @@ namespace Sci_fi_Battleship
         int pcruiser = 0;
         int pdestroyer = 0;
         int pscout = 0;
-        int ecarrier = 0;
-        int ebattleship = 0;
-        int ecruiser = 0;
-        int edestroyer = 0;
-        int escout = 0;
         int playerScore;
         int enemyScore;
         int shots = 0;
@@ -51,6 +50,19 @@ namespace Sci_fi_Battleship
         string AttackPosition;
         int torpspread = 0;
         bool caspecial = false;
+        bool baspecial = false;
+        string TricobaltTarget;
+        int tritarg = 0;
+        bool pcarrieralive = true;
+        bool pbattleshipalive = true;
+        bool pcruiseralive = true;
+        bool pdestroyeralive = true;
+        bool pscoutalive = true;
+        bool hittarget;
+        int catargets = 0;
+        string FighterTarget;
+        bool scspecial = false;
+        bool despecial = false;
 
         WindowsMediaPlayer background = new WindowsMediaPlayer();
         SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Stinger.wav");
@@ -62,7 +74,11 @@ namespace Sci_fi_Battleship
         SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion2.wav");
         SoundPlayer enemyhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion3.wav");
         SoundPlayer miss = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\smallexplosion3.wav");
-        SoundPlayer cruiserfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\quantumtorpedoes.wav");
+        SoundPlayer cruiserfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\tng_torpedo_clean.wav");
+        SoundPlayer battleshipfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\quantumtorpedoes.wav");
+        SoundPlayer tricobalt = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\largeexplosion1.wav");
+        SoundPlayer fighter = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\pulse.WAV");
+        SoundPlayer homing = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\quantumtorpeodoes2.wav");
         public Form1()
         {
             InitializeComponent();
@@ -87,13 +103,27 @@ namespace Sci_fi_Battleship
             Thread.Sleep(3000);
             enemyfire.Play();
             Thread.Sleep(3000);
+            hittarget = false;
             crspecial = false;
             crshots = 0;
+            tritarg = 0;
+            torpspread = 0;
+            baspecial = false;
+            caspecial = false;
+            scspecial = false;
+            despecial = false;
+            catargets = 0;
+            String[] tspreadtargets = { "Blank", "Blank", "Blank" };
+            String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
+            String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank" };
+            int Index = rand.Next(PlayerPositionButtons.Count);
             if (PlayerPositionButtons.Count > 0)
             {
-                int Index = rand.Next(PlayerPositionButtons.Count);
-                if ((string)PlayerPositionButtons[Index].Tag == "Player Carrier" || (string)PlayerPositionButtons[Index].Tag == "Player Battleship" || (string)PlayerPositionButtons[Index].Tag == "Player Cruiser" || (string)PlayerPositionButtons[Index].Tag == "Player Destroyer" || (string)PlayerPositionButtons[Index].Tag == "Player Scout")
+                if ((string)PlayerPositionButtons[Index].Tag == "Player Carrier")
                 {
+                    SpecialAbilityButtons[0].Enabled = false;
+                    SpecialAbilityButtons[0].BackgroundImage = Properties.Resources.missIcon;
+                    pcarrieralive = false;
                     PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
                     PlayerPositionButtons[Index].Enabled = false;
@@ -101,8 +131,69 @@ namespace Sci_fi_Battleship
                     enemyhit.Play();
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
+                    hittarget = true;
+
                 }
-                else
+                if ((string)PlayerPositionButtons[Index].Tag == "Player Battleship")
+                {
+                    SpecialAbilityButtons[1].Enabled = false;
+                    SpecialAbilityButtons[1].BackgroundImage = Properties.Resources.missIcon;
+                    pbattleshipalive = false;
+                    PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
+                    EnemyAttack.Text = PlayerPositionButtons[Index].Text;
+                    PlayerPositionButtons[Index].Enabled = false;
+                    PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    enemyhit.Play();
+                    PlayerPositionButtons.RemoveAt(Index);
+                    enemyScore += 1;
+                    hittarget = true;
+
+                }
+                if ((string)PlayerPositionButtons[Index].Tag == "Player Cruiser")
+                {
+                    SpecialAbilityButtons[2].Enabled = false;
+                    SpecialAbilityButtons[2].BackgroundImage = Properties.Resources.missIcon;
+                    pcruiseralive = false;
+                    PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
+                    EnemyAttack.Text = PlayerPositionButtons[Index].Text;
+                    PlayerPositionButtons[Index].Enabled = false;
+                    PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    enemyhit.Play();
+                    PlayerPositionButtons.RemoveAt(Index);
+                    enemyScore += 1;
+                    hittarget = true;
+
+                }
+                if ((string)PlayerPositionButtons[Index].Tag == "Player Destroyer")
+                {
+                    SpecialAbilityButtons[3].Enabled = false;
+                    SpecialAbilityButtons[3].BackgroundImage = Properties.Resources.missIcon;
+                    pdestroyeralive = false;
+                    PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
+                    EnemyAttack.Text = PlayerPositionButtons[Index].Text;
+                    PlayerPositionButtons[Index].Enabled = false;
+                    PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    enemyhit.Play();
+                    PlayerPositionButtons.RemoveAt(Index);
+                    enemyScore += 1;
+                    hittarget = true;
+
+                }
+                if ((string)PlayerPositionButtons[Index].Tag == "Player Scout")
+                {
+                    SpecialAbilityButtons[4].Enabled = false;
+                    SpecialAbilityButtons[4].BackgroundImage = Properties.Resources.missIcon;
+                    pscoutalive = false;
+                    PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
+                    EnemyAttack.Text = PlayerPositionButtons[Index].Text;
+                    PlayerPositionButtons[Index].Enabled = false;
+                    PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
+                    enemyhit.Play();
+                    PlayerPositionButtons.RemoveAt(Index);
+                    enemyScore += 1;
+                    hittarget = true;
+                }
+                if ((string)PlayerPositionButtons[Index].Tag == null && hittarget !=true)
                 {
                     PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.missIcon;
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
@@ -143,20 +234,66 @@ namespace Sci_fi_Battleship
 
         private void AttackButtonEvent(object sender, EventArgs e)
         {
-            if (EnemyLocation.Text != "Blank")
+            if (EnemyLocation.Text != "Blank" && scspecial == false && despecial == false)
             {
                 AttackPosition = EnemyLocation.Text.ToLower();
                 shots = 0;
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                if (caspecial == true)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        fighter.Play();
+                        Thread.Sleep(500);
+                    }
+                    do
+                    {
+                        AttackPosition = carriertargets[catargets].ToLower();
+                        index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                        {
+                            EnemyPositionButtons[index].Enabled = false;
+                            EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
+                            EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                            EnemyPositionButtons[index].Tag = "Sunk";
+                            playerScore += 1;
+                            tricobalt.Play();
+                            btnAttack.BackColor = Color.White;
+                            btnAttack.ForeColor = Color.Black;
+                            if (caspecial == true && catargets < 6)
+                            {
+                                catargets += 1;
+                            }
+
+                        }
+                        else
+                        {
+                            EnemyPositionButtons[index].Enabled = false;
+                            EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
+                            EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                            tricobalt.Play();
+                            EnemyPositionButtons[index].Tag = "Missed";
+                            btnAttack.BackColor = Color.White;
+                            btnAttack.ForeColor = Color.Black;
+                            if (caspecial == true && catargets < 6)
+                            {
+                                catargets += 1;
+                            }
+                        }
+                    } while (catargets < 6);
+                    if (catargets == 6)
+                    {
+                        EnemyPlayTimer.Start();
+                    }
+                }
                 if (crspecial == true)
                 {
                     do
                     {
                         AttackPosition = tspreadtargets[torpspread].ToLower();
-                        shots = 0;
                         index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
                         cruiserfire.Play();
-                        Thread.Sleep(3000);
+                        Thread.Sleep(1000);
                         if (EnemyPositionButtons[index].Enabled)
                         {
 
@@ -189,7 +326,7 @@ namespace Sci_fi_Battleship
                                 if (crspecial == true && torpspread < 3)
                                 {
                                     torpspread += 1;
-                                    Thread.Sleep(3000);
+                                    Thread.Sleep(1000);
                                 }
                             }
                         }
@@ -199,17 +336,59 @@ namespace Sci_fi_Battleship
                         EnemyPlayTimer.Start();
                     }
                 }
-                if (crspecial != true)
+                if (baspecial == true)
+                {
+                    battleshipfire.Play();
+                    Thread.Sleep(2000);
+                    do
+                    {
+                        AttackPosition = battleshiptargets[tritarg].ToLower();
+                        shots = 0;
+                        index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                        {
+                            EnemyPositionButtons[index].Enabled = false;
+                            EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
+                            EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                            EnemyPositionButtons[index].Tag = "Sunk";
+                            playerScore += 1;
+                            tricobalt.Play();
+                            btnAttack.BackColor = Color.White;
+                            btnAttack.ForeColor = Color.Black;
+                            if (baspecial == true && tritarg < 5)
+                            {
+                                tritarg += 1;
+                            }
+
+                        }
+                        else
+                        {
+                            EnemyPositionButtons[index].Enabled = false;
+                            EnemyPositionButtons[index].BackgroundImage = Properties.Resources.missIcon;
+                            EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                            tricobalt.Play();
+                            EnemyPositionButtons[index].Tag = "Missed";
+                            btnAttack.BackColor = Color.White;
+                            btnAttack.ForeColor = Color.Black;
+                            if (baspecial == true && tritarg < 5)
+                            {
+                                tritarg += 1;
+                            }
+                        }
+                    } while (tritarg < 5);
+                    if (tritarg == 5)
+                    {
+                        Thread.Sleep(2500);
+                        EnemyPlayTimer.Start();
+                    }
+
+                }
+                if (crspecial != true && baspecial != true && caspecial != true)
                 {
                     if (((string)EnemyPositionButtons[index].Tag == "Sunk") || ((string)EnemyPositionButtons[index].Tag == "Missed"))
                     {
                         unable.Play();
                         MessageBox.Show("You have already attacked this position!", "Help");
-                    }
-                    else
-                    {
-                        unable.Play();
-                        MessageBox.Show("Choose a position to attack from the enemy's board.", "Help");
                     }
                     playerfire.Play();
                     Thread.Sleep(3000);
@@ -237,10 +416,40 @@ namespace Sci_fi_Battleship
                             EnemyPlayTimer.Start();
                             btnAttack.BackColor = Color.White;
                             btnAttack.ForeColor = Color.Black;
+                            Thread.Sleep(2500);
                         }
                     }
 
                 }
+            }
+            if (scspecial == true)
+            {
+                int i = rand.Next(EnemyShipPositions.Length);
+                MessageBox.Show("There is an enemy starship at: " + EnemyShipPositions[i], "Sensor Scan results");
+                shots = 0;
+                EnemyPlayTimer.Start();
+            }
+            if (despecial == true)
+            {
+                int i = rand.Next(EnemyShipPositions.Length);
+                AttackPosition = EnemyShipPositions[i].ToLower();
+                int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                homing.Play();
+                Thread.Sleep(3000);
+                EnemyPositionButtons[index].Enabled = false;
+                EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
+                EnemyPositionButtons[index].BackColor = Color.DarkBlue;
+                EnemyPositionButtons[index].Tag = "Sunk";
+                playerScore += 1;
+                playerhit.Play();
+                btnAttack.BackColor = Color.White;
+                btnAttack.ForeColor = Color.Black;
+                EnemyPlayTimer.Start();
+            }
+            if(EnemyLocation.Text == "Blank" && scspecial == false && despecial == false)
+            {
+                unable.Play();
+                MessageBox.Show("Choose a position to attack from the enemy's board.", "Help");
             }
             if (enemyScore > 4 || playerScore > 4)
             {
@@ -276,29 +485,14 @@ namespace Sci_fi_Battleship
 
         private void enemyLocationPicker()
         {
-            int j = 0;
             for (int i = 0; i < 5; i++)
             {
                 int index = rand.Next(EnemyPositionButtons.Count);
                 if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
                 {
-                    EnemyPositionButtons[index].Tag = EnemyShipClasses[j];
-                    Debug.WriteLine(EnemyShipClasses[j] + " Position: " + EnemyPositionButtons[index].Text);
-                    j += 1;
-                }
-                else
-                {
-                    index = rand.Next(EnemyPositionButtons.Count);
-                }
-            }
-            if (j < 5)
-            {
-                int index = rand.Next(EnemyPositionButtons.Count);
-                if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
-                {
-                    EnemyPositionButtons[index].Tag = EnemyShipClasses[j];
-                    Debug.WriteLine(EnemyShipClasses[j] + " Position: " + EnemyPositionButtons[index].Text);
-                    j += 1;
+                    EnemyPositionButtons[index].Tag = EnemyShipClasses[i];
+                    Debug.WriteLine(EnemyShipClasses[i] + " Position: " + EnemyPositionButtons[index].Text);
+                    EnemyShipPositions[i] = EnemyPositionButtons[index].Text;
                 }
                 else
                 {
@@ -313,7 +507,8 @@ namespace Sci_fi_Battleship
             PlayerPositionButtons = new List<Button> { u1, u2, u3, u4, u5, u6, v1, v2, v3, v4, v5, v6, w1, w2, w3, w4, w5, w6, x1, x2, x3, x4, x5, x6, y1, y2, y3, y4, y5, y6, z1, z2, z3, z4, z5, z6};
             EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, b1, b2, b3, b4, b5, b6, c1, c2, c3, c4, c5, c6, d1, d2, d3, d4, d5, d6, e1, e2, e3, e4, e5, e6, f1, f2, f3, f4, f5, f6 };
             PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
-            txtHelp.Text = "1. Selct the ship you want to place down, then select where you want it to go on the board.";
+            SpecialAbilityButtons = new List<Button> { CarrierSpecialB, BattleshipSpecialB, CruiserSpecialB, DestroyerSpecialB, ScoutSpecialB };
+            txtHelp.Text = "1. Select the ship you want to place down, then select where you want it to go on the board.";
 
 
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
@@ -336,6 +531,11 @@ namespace Sci_fi_Battleship
             {
                 PlayerSelectionButtons[i].Enabled = true;
             }
+            for (int i = 0; i < SpecialAbilityButtons.Count; i++)
+            {
+                SpecialAbilityButtons[i].Enabled = true;
+                SpecialAbilityButtons[i].BackgroundImage = null;
+            }
             playerScore = 0;
             enemyScore = 0;
             totalShips = 5;
@@ -344,11 +544,6 @@ namespace Sci_fi_Battleship
             pcruiser = 0;
             pdestroyer = 0;
             pscout = 0;
-            ecarrier = 1;
-            ebattleship = 0;
-            ecruiser = 0;
-            edestroyer = 0;
-            escout = 0;
             shots = 0;
             carrierspecial = 5;
             battleshipspecial = 4;
@@ -357,6 +552,7 @@ namespace Sci_fi_Battleship
             scoutspecial = 1;
             targeted = false;
             EnemyAttack.Text = "A1";
+            EnemyLocation.Text = "Blank";
             background.controls.play();
             btnAttack.Enabled = false;
             btnAttack.BackColor = Color.White;
@@ -393,7 +589,73 @@ namespace Sci_fi_Battleship
                     tspreadtargets[crshots] = EnemyLocation.Text;
                     crshots += 1;
                 }
-
+                if (baspecial == true)
+                {
+                    TricobaltTarget = EnemyLocation.Text;
+                    int i = Array.IndexOf(EnemyPositions, TricobaltTarget);
+                    battleshiptargets[0] = EnemyPositions[i];
+                    battleshiptargets[1] = EnemyPositions[i+1];
+                    battleshiptargets[2] = EnemyPositions[i-1];
+                    battleshiptargets[3] = EnemyPositions[i+6];
+                    battleshiptargets[4] = EnemyPositions[i-6];
+                }
+                if (caspecial == true)
+                {
+                    if (EnemyLocation.Text == "A1"|| EnemyLocation.Text == "A2"|| EnemyLocation.Text == "A3"|| EnemyLocation.Text == "A4"|| EnemyLocation.Text == "A5"|| EnemyLocation.Text == "A6")
+                    {
+                        carriertargets[0] = "A1";
+                        carriertargets[1] = "A2";
+                        carriertargets[2] = "A3";
+                        carriertargets[3] = "A4";
+                        carriertargets[4] = "A5";
+                        carriertargets[5] = "A6";
+                    }
+                    if (EnemyLocation.Text == "B1"|| EnemyLocation.Text == "B2"|| EnemyLocation.Text == "B3"|| EnemyLocation.Text == "B4"|| EnemyLocation.Text == "B5"|| EnemyLocation.Text == "B6")
+                    {
+                        carriertargets[0] = "B1";
+                        carriertargets[1] = "B2";
+                        carriertargets[2] = "B3";
+                        carriertargets[3] = "B4";
+                        carriertargets[4] = "B5";
+                        carriertargets[5] = "B6";
+                    }
+                    if (EnemyLocation.Text == "C1"|| EnemyLocation.Text == "C2"|| EnemyLocation.Text == "C3"|| EnemyLocation.Text == "C4"|| EnemyLocation.Text == "C5"|| EnemyLocation.Text == "C6")
+                    {
+                        carriertargets[0] = "C1";
+                        carriertargets[1] = "C2";
+                        carriertargets[2] = "C3";
+                        carriertargets[3] = "C4";
+                        carriertargets[4] = "C5";
+                        carriertargets[5] = "C6";
+                    }
+                    if (EnemyLocation.Text == "D1"|| EnemyLocation.Text == "D2"|| EnemyLocation.Text == "D3"|| EnemyLocation.Text == "D4"|| EnemyLocation.Text == "D5"|| EnemyLocation.Text == "D6")
+                    {
+                        carriertargets[0] = "D1";
+                        carriertargets[1] = "D2";
+                        carriertargets[2] = "D3";
+                        carriertargets[3] = "D4";
+                        carriertargets[4] = "D5";
+                        carriertargets[5] = "D6";
+                    }
+                    if (EnemyLocation.Text == "E1"|| EnemyLocation.Text == "E2"|| EnemyLocation.Text == "E3"|| EnemyLocation.Text == "E4"|| EnemyLocation.Text == "E5"|| EnemyLocation.Text == "E6")
+                    {
+                        carriertargets[0] = "E1";
+                        carriertargets[1] = "E2";
+                        carriertargets[2] = "E3";
+                        carriertargets[3] = "E4";
+                        carriertargets[4] = "E5";
+                        carriertargets[5] = "E6";
+                    }
+                    if (EnemyLocation.Text == "F1"|| EnemyLocation.Text == "F2"|| EnemyLocation.Text == "F3"|| EnemyLocation.Text == "F4"|| EnemyLocation.Text == "F5"|| EnemyLocation.Text == "F6")
+                    {
+                        carriertargets[0] = "F1";
+                        carriertargets[1] = "F2";
+                        carriertargets[2] = "F3";
+                        carriertargets[3] = "F4";
+                        carriertargets[4] = "F5";
+                        carriertargets[5] = "F6";
+                    }
+                }
             }
         }
 
@@ -548,27 +810,46 @@ namespace Sci_fi_Battleship
 
         private void Carrierspecial(object sender, EventArgs e)
         {
-            unable.Play();
-            MessageBox.Show("This feature has not been programmed in yet.", "Help");
+            select.Play();
+            caspecial = true;
         }
     
 
         private void Battleshipspecial(object sender, EventArgs e)
         {
-            unable.Play();
-            MessageBox.Show("This feature has not been programmed in yet.", "Help");
+            select.Play();
+            baspecial = true;
         }
 
         private void Destroyerspecial(object sender, EventArgs e)
         {
-            unable.Play();
-            MessageBox.Show("This feature has not been programmed in yet.", "Help");
+            select.Play();
+            despecial = true;
+            shots = 1;
+            btnAttack.BackColor = Color.Red;
+            btnAttack.ForeColor = Color.White;
         }
 
         private void Scoutspecial(object sender, EventArgs e)
         {
-            unable.Play();
-            MessageBox.Show("This feature has not been programmed in yet.", "Help");
+            select.Play();
+            scspecial = true;
+            shots = 1;
+            btnAttack.BackColor = Color.Red;
+            btnAttack.ForeColor = Color.White;
+        }
+
+        private void CancelAttack(object sender, EventArgs e)
+        {
+            select.Play();
+            caspecial = false;
+            baspecial = false;
+            tritarg = 0;
+            string [] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
+            crspecial = false;
+            crshots = 0;
+            string [] tspreadtargets = { "Blank", "Blank", "Blank" };
+
         }
     }
 }

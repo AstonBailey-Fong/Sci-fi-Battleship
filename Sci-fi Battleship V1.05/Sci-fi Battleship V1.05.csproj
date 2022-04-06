@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form2.cs" />
     <Compile Include="playerTimer\Interval.cs" />
     <Compile Include="Sci-Fi Battleship V1.05.cs">
       <SubType>Form</SubType>
