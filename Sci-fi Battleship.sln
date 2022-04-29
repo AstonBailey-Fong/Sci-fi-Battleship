@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.04", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.05", "Sci-fi Battleship V1.05\Sci-fi Battleship V1.05.csproj", "{FB08CCAB-DC9F-498A-8AF5-B6C05C88C264}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.06", "Sci-fi Battleship V1.06\Sci-fi Battleship V1.06.csproj", "{2CD99C04-8D57-419E-8B3E-3256F87ED81F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FB08CCAB-DC9F-498A-8AF5-B6C05C88C264}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB08CCAB-DC9F-498A-8AF5-B6C05C88C264}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB08CCAB-DC9F-498A-8AF5-B6C05C88C264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD99C04-8D57-419E-8B3E-3256F87ED81F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD99C04-8D57-419E-8B3E-3256F87ED81F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD99C04-8D57-419E-8B3E-3256F87ED81F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD99C04-8D57-419E-8B3E-3256F87ED81F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

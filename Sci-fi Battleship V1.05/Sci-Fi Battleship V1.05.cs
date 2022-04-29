@@ -104,14 +104,9 @@ namespace Sci_fi_Battleship
             enemyfire.Play();
             Thread.Sleep(3000);
             hittarget = false;
-            crspecial = false;
             crshots = 0;
             tritarg = 0;
             torpspread = 0;
-            baspecial = false;
-            caspecial = false;
-            scspecial = false;
-            despecial = false;
             catargets = 0;
             String[] tspreadtargets = { "Blank", "Blank", "Blank" };
             String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
@@ -201,6 +196,7 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons[Index].BackColor = Color.DarkBlue;
                     miss.Play();
                     PlayerPositionButtons.RemoveAt(Index);
+                    SpecialAbilityCooldown.Start();
                     EnemyPlayTimer.Stop();
                 }
             }
@@ -244,8 +240,9 @@ namespace Sci_fi_Battleship
                     for (int i = 0; i < 6; i++)
                     {
                         fighter.Play();
-                        Thread.Sleep(500);
+                        Thread.Sleep(600);
                     }
+                    Thread.Sleep(400);
                     do
                     {
                         AttackPosition = carriertargets[catargets].ToLower();
@@ -508,7 +505,7 @@ namespace Sci_fi_Battleship
             EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, b1, b2, b3, b4, b5, b6, c1, c2, c3, c4, c5, c6, d1, d2, d3, d4, d5, d6, e1, e2, e3, e4, e5, e6, f1, f2, f3, f4, f5, f6 };
             PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
             SpecialAbilityButtons = new List<Button> { CarrierSpecialB, BattleshipSpecialB, CruiserSpecialB, DestroyerSpecialB, ScoutSpecialB };
-            txtHelp.Text = "1. Select the ship you want to place down, then select where you want it to go on the board.";
+            txtHelp.Text = "Select the ship you want to place down, then select where you want it to go on the board.";
 
 
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
@@ -557,6 +554,26 @@ namespace Sci_fi_Battleship
             btnAttack.Enabled = false;
             btnAttack.BackColor = Color.White;
             btnAttack.ForeColor = Color.Black;
+            caspecial = false;
+            carrierspecial = 5;
+            SpecialAbilityButtons[0].Enabled = false;
+            SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+            baspecial = false;
+            battleshipspecial = 4;
+            SpecialAbilityButtons[1].Enabled = false;
+            SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+            crspecial = false;
+            cruiserspecial = 3;
+            SpecialAbilityButtons[2].Enabled = false;
+            SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+            despecial = false;
+            destroyerspecial = 2;
+            SpecialAbilityButtons[3].Enabled = false;
+            SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+            scspecial = false;
+            scoutspecial = 1;
+            SpecialAbilityButtons[4].Enabled = false;
+            SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
             enemyLocationPicker();
 
         }
@@ -569,7 +586,7 @@ namespace Sci_fi_Battleship
             if (shots > 0) 
             {
                 unable.Play();
-                MessageBox.Show("You cannot make another choice until your next turn.", "Help");
+                MessageBox.Show("Use the cancel button if you wish to make another selection.", "Help");
 
             }
             else
@@ -721,7 +738,7 @@ namespace Sci_fi_Battleship
                 if (totalShips == 0)
                 {
                     btnAttack.Enabled = true;
-                    txtHelp.Text = "2. Select a position to attack from the enemy's board.";
+                    txtHelp.Text = "Select a position to attack from the enemy's board.";
                 }
 
             }
@@ -805,13 +822,14 @@ namespace Sci_fi_Battleship
             select.Play();
             crspecial = true;
             shots = -2;
-
+            txtHelp.Text = "Select 3 positions on the board to attack.";
         }
 
         private void Carrierspecial(object sender, EventArgs e)
         {
             select.Play();
             caspecial = true;
+            txtHelp.Text = "Select a row to attack by clicking on a position in the target row.";
         }
     
 
@@ -819,6 +837,7 @@ namespace Sci_fi_Battleship
         {
             select.Play();
             baspecial = true;
+            txtHelp.Text = "Select a target for the tricobalt device.";
         }
 
         private void Destroyerspecial(object sender, EventArgs e)
@@ -828,6 +847,7 @@ namespace Sci_fi_Battleship
             shots = 1;
             btnAttack.BackColor = Color.Red;
             btnAttack.ForeColor = Color.White;
+            txtHelp.Text = "Press attack to fire the homing torpedo.";
         }
 
         private void Scoutspecial(object sender, EventArgs e)
@@ -837,6 +857,7 @@ namespace Sci_fi_Battleship
             shots = 1;
             btnAttack.BackColor = Color.Red;
             btnAttack.ForeColor = Color.White;
+            txtHelp.Text = "Press attack to activate the sensor scan.";
         }
 
         private void CancelAttack(object sender, EventArgs e)
@@ -845,11 +866,186 @@ namespace Sci_fi_Battleship
             caspecial = false;
             baspecial = false;
             tritarg = 0;
-            string [] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
             crspecial = false;
             crshots = 0;
-            string [] tspreadtargets = { "Blank", "Blank", "Blank" };
+            AttackPosition = EnemyLocation.Text.ToLower();
+            shots = 0;
+            despecial = false;
+            scspecial = false;
+            int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+            EnemyPositionButtons[index].BackgroundImage = null;
+            EnemyLocation.Text = "Blank";
+            txtHelp.Text = "Select a position to attack from the enemy's board.";
+        }
 
+        private void SpecialAbilityCooldownEvent(object sender, EventArgs e)
+        {
+            if (pcarrieralive == true)
+            {
+                if (carrierspecial > 0)
+                {
+                    SpecialAbilityButtons[0].Enabled = false;
+                    carrierspecial -= 1;
+                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                }
+                if (caspecial == true)
+                {
+                    caspecial = false;
+                    carrierspecial = 5;
+                    battleshipspecial = 4;
+                    cruiserspecial = 3;
+                    destroyerspecial = 2;
+                    scoutspecial = 1;
+                    SpecialAbilityButtons[0].Enabled = false;
+                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Enabled = false;
+                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Enabled = false;
+                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Enabled = false;
+                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Enabled = false;
+                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                }
+                if (carrierspecial == 0)
+                {
+                    SpecialAbilityButtons[0].Enabled = true;
+                    SpecialAbilityButtons[0].Text = "Carrier Strike: Ready";
+                }
+            }
+            if (pbattleshipalive == true)
+            {
+                if (battleshipspecial > 0)
+                {
+                    SpecialAbilityButtons[1].Enabled = false;
+                    battleshipspecial -= 1;
+                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                }
+                if (baspecial == true)
+                {
+                    baspecial = false;
+                    carrierspecial = 5;
+                    battleshipspecial = 4;
+                    cruiserspecial = 3;
+                    destroyerspecial = 2;
+                    scoutspecial = 1;
+                    SpecialAbilityButtons[0].Enabled = false;
+                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Enabled = false;
+                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Enabled = false;
+                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Enabled = false;
+                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Enabled = false;
+                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                }
+                if (battleshipspecial == 0)
+                {
+                    SpecialAbilityButtons[1].Enabled = true;
+                    SpecialAbilityButtons[1].Text = "Tricobalt Device: Ready";
+                }
+            }
+            if (pcruiseralive == true)
+            {
+                if (cruiserspecial > 0)
+                {
+                    SpecialAbilityButtons[2].Enabled = false;
+                    cruiserspecial -= 1;
+                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                }
+                if (crspecial == true)
+                {
+                    crspecial = false;
+                    carrierspecial = 5;
+                    battleshipspecial = 4;
+                    cruiserspecial = 3;
+                    destroyerspecial = 2;
+                    scoutspecial = 1;
+                    SpecialAbilityButtons[0].Enabled = false;
+                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Enabled = false;
+                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Enabled = false;
+                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Enabled = false;
+                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Enabled = false;
+                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                }
+                if (cruiserspecial == 0)
+                {
+                    SpecialAbilityButtons[2].Enabled = true;
+                    SpecialAbilityButtons[2].Text = "Torpedo Spread: Ready";
+                }
+            }
+            if (pdestroyeralive == true)
+            {
+                if (destroyerspecial > 0)
+                {
+                    SpecialAbilityButtons[3].Enabled = false;
+                    destroyerspecial -= 1;
+                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                }
+                if (despecial == true)
+                {
+                    despecial = false;
+                    carrierspecial = 5;
+                    battleshipspecial = 4;
+                    cruiserspecial = 3;
+                    destroyerspecial = 2;
+                    scoutspecial = 1;
+                    SpecialAbilityButtons[0].Enabled = false;
+                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Enabled = false;
+                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Enabled = false;
+                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Enabled = false;
+                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Enabled = false;
+                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                }
+                if (destroyerspecial == 0)
+                {
+                    SpecialAbilityButtons[3].Enabled = true;
+                    SpecialAbilityButtons[3].Text = "Homing Torpedo: Ready";
+                }
+            }
+            if (pscoutalive == true)
+            {
+                if (scoutspecial > 0)
+                {
+                    SpecialAbilityButtons[4].Enabled = false;
+                    scoutspecial -= 1;
+                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                }
+                if (scspecial == true)
+                {
+                    scspecial = false;
+                    carrierspecial = 5;
+                    battleshipspecial = 4;
+                    cruiserspecial = 3;
+                    destroyerspecial = 2;
+                    scoutspecial = 1;
+                    SpecialAbilityButtons[0].Enabled = false;
+                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Enabled = false;
+                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Enabled = false;
+                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Enabled = false;
+                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Enabled = false;
+                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                }
+                if (scoutspecial == 0)
+                {
+                    SpecialAbilityButtons[4].Enabled = true;
+                    SpecialAbilityButtons[4].Text = "Sensor Scan: Ready";
+                }
+            }
+            SpecialAbilityCooldown.Stop();
         }
     }
 }
