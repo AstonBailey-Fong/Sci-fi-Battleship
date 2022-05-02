@@ -61,6 +61,11 @@ namespace Sci_fi_Battleship
         int catargets = 0;
         bool scspecial = false;
         bool despecial = false;
+        string caspecialname;
+        string baspecialname;
+        string crspecialname;
+        string despecialname;
+        string scspecialname;
 
         WindowsMediaPlayer background = new WindowsMediaPlayer();
         SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Stinger.wav");
@@ -77,13 +82,16 @@ namespace Sci_fi_Battleship
         SoundPlayer tricobalt = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\largeexplosion1.wav");
         SoundPlayer fighter = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\pulse.WAV");
         SoundPlayer homing = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\quantumtorpeodoes2.wav");
-        public StandardGame()
+        public StandardGame(string Player_Faction, string Enemy_Faction)
         {
             InitializeComponent();
+            PlayerFaction.Text = "Player Faction: " + Player_Faction;
+            EnemyFaction.Text = "Enemy Faction: " + Enemy_Faction;
             background.URL = "Federation Ambient Theme.mp3";
             background.settings.autoStart = true;
             background.settings.setMode("loop", true);
             RestartGame();
+
         }
 
         private void txtPlayerS_Click(object sender, EventArgs e)
@@ -504,7 +512,109 @@ namespace Sci_fi_Battleship
             PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
             SpecialAbilityButtons = new List<Button> { CarrierSpecialB, BattleshipSpecialB, CruiserSpecialB, DestroyerSpecialB, ScoutSpecialB };
             txtHelp.Text = "Select the ship you want to place down, then select where you want it to go on the board.";
-
+            if (PlayerFaction.Text == "Player Faction: UFP")
+            {
+                CarrierName.Text = "Typhon Class\nCarrier";
+                BattleshipName.Text = "Sovereign Class\nBattleship";
+                CruiserName.Text = "Akira Class\nCruiser";
+                DestroyerName.Text = "Defiant Class\nDestroyer";
+                ScoutName.Text = "Nova Class\nScout";
+                caspecialname = "Peregrine Strike";
+                baspecialname = "Tricobalt Device";
+                crspecialname = "Torpedo Spread";
+                despecialname = "Homing Torpedo";
+                scspecialname = "Sensor Scan";
+            }
+            if (PlayerFaction.Text == "Player Faction: KlE")
+            {
+                CarrierName.Text = "SuQ'jagh Class\nCarrier";
+                BattleshipName.Text = "Ne'ghVar Class\nBattleship";
+                CruiserName.Text = "Vorcha Class\nCruiser";
+                DestroyerName.Text = "B'Rel Class\nDestroyer";
+                ScoutName.Text = "NuQ'DuJ Class\nScout";
+                caspecialname = "Carrier Strike";
+                baspecialname = "Tricobalt Device";
+                crspecialname = "Torpedo Spread";
+                despecialname = "Homing Torpedo";
+                scspecialname = "Sensor Scan";
+            }
+            if (PlayerFaction.Text == "Player Faction: RSE")
+            {
+                CarrierName.Text = "Hawk Class\nCarrier";
+                BattleshipName.Text = "D'Deridex Class\nBattleship";
+                CruiserName.Text = "Griffin Class\nCruiser";
+                DestroyerName.Text = "Shrike Class\nDestroyer";
+                ScoutName.Text = "Talon Class\nScout";
+                caspecialname = "Scorpion Strike";
+                baspecialname = "Tricobalt Device";
+                crspecialname = "Torpedo Spread";
+                despecialname = "Homing Torpedo";
+                scspecialname = "Sensor Scan";
+            }
+            if (PlayerFaction.Text == "Player Faction: BoC")
+            {
+                CarrierName.Text = "NO CARRIER\nAVAILABLE";
+                BattleshipName.Text = "Cube\nBattleship";
+                CruiserName.Text = "Sphere\nCruiser";
+                DestroyerName.Text = "NO DESTROYER\nAVAILABLE";
+                ScoutName.Text = "Probe\nScout";
+                caspecialname = "Cutting Beam";
+                baspecialname = "Tricobalt Device";
+                crspecialname = "Torpedo Spread";
+                despecialname = "Homing Torpedo";
+                scspecialname = "Sensor Scan";
+            }
+            if (PlayerFaction.Text == "Player Faction: ReA")
+            {
+                CarrierName.Text = "MC-80 Class\nCarrier";
+                BattleshipName.Text = "MC-75 Class\nBattleship";
+                CruiserName.Text = "Dreadnought Class\nCruiser";
+                DestroyerName.Text = "Nebulon-B Class\nFrigate";
+                ScoutName.Text = "CR70 Class\nCorvette";
+                caspecialname = "Proton Torpedo";
+                crspecialname = "Missile Spread";
+                despecialname = "Homing Missile";
+                scspecialname = "Scouting Run";
+            }
+            if (PlayerFaction.Text == "Player Faction: GaE")
+            {
+                CarrierName.Text = "Venator Class\nCarrier";
+                BattleshipName.Text = "Imperial Class\nBattleship";
+                CruiserName.Text = "Victory Class\nCruiser";
+                DestroyerName.Text = "Arquitens Class\nFrigate";
+                ScoutName.Text = "Raider Class\nCorvette";
+                caspecialname = "TIE Strike";
+                baspecialname = "Proton Torpedo";
+                crspecialname = "Missile Spread";
+                despecialname = "Homing Missile";
+                scspecialname = "Scouting Run";
+            }
+            if (PlayerFaction.Text == "Player Faction: TCK")
+            {
+                CarrierName.Text = "Mercury Class\nModern Battlestar";
+                BattleshipName.Text = "Jupiter Class\nBattlestar";
+                CruiserName.Text = "Ranger Class\nMissile Cruiser";
+                DestroyerName.Text = "Adamant Class\nFrigate";
+                ScoutName.Text = "Minotaur Class\nCorvette";
+                caspecialname = "Viper Strike";
+                baspecialname = "Nuclear Device";
+                crspecialname = "Missile Spread";
+                despecialname = "Homing Missile";
+                scspecialname = "Scouting Run";
+            }
+            if (PlayerFaction.Text == "Player Faction: CyE")
+            {
+                CarrierName.Text = "Modern Basestar\nModern Command Platform";
+                BattleshipName.Text = "Basestar\nCommand Platform";
+                CruiserName.Text = "Argos\nMissile Platform";
+                DestroyerName.Text = "Arachne\nAssault Cruiser";
+                ScoutName.Text = "Nemesis\nCorvette";
+                caspecialname = "Raider Strike";
+                baspecialname = "Nuclear Device";
+                crspecialname = "Missile Spread";
+                despecialname = "Homing Missile";
+                scspecialname = "Scouting Run";
+            }
 
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
             {

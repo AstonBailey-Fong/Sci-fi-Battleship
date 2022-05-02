@@ -50,6 +50,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>star-trek-icon-sov.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,17 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form2.cs" />
-    <Compile Include="Game Select.cs">
+    <Compile Include="Launcher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Game Select.Designer.cs">
-      <DependentUpon>Game Select.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Main Menu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main Menu.Designer.cs">
-      <DependentUpon>Main Menu.cs</DependentUpon>
+    <Compile Include="Launcher.Designer.cs">
+      <DependentUpon>Launcher.cs</DependentUpon>
     </Compile>
     <Compile Include="playerTimer\Interval.cs" />
     <Compile Include="StandardGame.cs">
@@ -86,11 +83,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Game Select.resx">
-      <DependentUpon>Game Select.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Main Menu.resx">
-      <DependentUpon>Main Menu.cs</DependentUpon>
+    <EmbeddedResource Include="Launcher.resx">
+      <DependentUpon>Launcher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StandardGame.resx">
       <DependentUpon>StandardGame.cs</DependentUpon>
@@ -203,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\imperial_overconfidence_by_dariustrent_degtqcb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="star-trek-icon-sov.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
