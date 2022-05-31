@@ -73,6 +73,56 @@ namespace Sci_fi_Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DomBattleshipDisplay {
+            get {
+                object obj = ResourceManager.GetObject("DomBattleshipDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DomCarrierDisplay {
+            get {
+                object obj = ResourceManager.GetObject("DomCarrierDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DomCruiserDisplay {
+            get {
+                object obj = ResourceManager.GetObject("DomCruiserDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DomDestroyerDisplay {
+            get {
+                object obj = ResourceManager.GetObject("DomDestroyerDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DomScoutDisplay {
+            get {
+                object obj = ResourceManager.GetObject("DomScoutDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FedBattleship {
             get {
                 object obj = ResourceManager.GetObject("FedBattleship", resourceCulture);
@@ -223,6 +273,106 @@ namespace Sci_fi_Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap KliBattleship {
+            get {
+                object obj = ResourceManager.GetObject("KliBattleship", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliBattleshipDisplay {
+            get {
+                object obj = ResourceManager.GetObject("KliBattleshipDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliCarrier {
+            get {
+                object obj = ResourceManager.GetObject("KliCarrier", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliCarrierDisplay {
+            get {
+                object obj = ResourceManager.GetObject("KliCarrierDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliCruiser {
+            get {
+                object obj = ResourceManager.GetObject("KliCruiser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliCruiserDisplay {
+            get {
+                object obj = ResourceManager.GetObject("KliCruiserDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliDestroyer {
+            get {
+                object obj = ResourceManager.GetObject("KliDestroyer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliDestroyerDisplay {
+            get {
+                object obj = ResourceManager.GetObject("KliDestroyerDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliScout {
+            get {
+                object obj = ResourceManager.GetObject("KliScout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KliScoutDisplay {
+            get {
+                object obj = ResourceManager.GetObject("KliScoutDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap missIcon {
             get {
                 object obj = ResourceManager.GetObject("missIcon", resourceCulture);
@@ -236,6 +386,56 @@ namespace Sci_fi_Battleship.Properties {
         internal static System.Drawing.Bitmap New_battleship_background {
             get {
                 object obj = ResourceManager.GetObject("New battleship background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RomBattleshipDisplay {
+            get {
+                object obj = ResourceManager.GetObject("RomBattleshipDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RomCarrierDisplay {
+            get {
+                object obj = ResourceManager.GetObject("RomCarrierDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RomCruiserDisplay {
+            get {
+                object obj = ResourceManager.GetObject("RomCruiserDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RomDestroyerDisplay {
+            get {
+                object obj = ResourceManager.GetObject("RomDestroyerDisplay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RomScoutDisplay {
+            get {
+                object obj = ResourceManager.GetObject("RomScoutDisplay", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

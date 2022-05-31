@@ -87,7 +87,22 @@ namespace Sci_fi_Battleship
             InitializeComponent();
             PlayerFaction.Text = "Player Faction: " + Player_Faction;
             EnemyFaction.Text = "Enemy Faction: " + Enemy_Faction;
-            background.URL = "Federation Ambient Theme.mp3";
+            if (Player_Faction == "UFP")
+            {
+                background.URL = "Federation Ambient Theme.mp3";
+            }
+            if (Player_Faction == "KlE")
+            {
+                background.URL = "Klingon Ambient Theme.mp3";
+            }
+            if (Player_Faction == "RSE")
+            {
+                background.URL = "Romulan Ambient Theme.mp3";
+            }
+            if (Player_Faction == "DoA")
+            {
+                background.URL = "Borg Ambient Theme.mp3";
+            }
             background.settings.autoStart = true;
             background.settings.setMode("loop", true);
             RestartGame();
@@ -514,7 +529,7 @@ namespace Sci_fi_Battleship
             txtHelp.Text = "Select the ship you want to place down, then select where you want it to go on the board.";
             if (PlayerFaction.Text == "Player Faction: UFP")
             {
-                CarrierName.Text = "Typhon Class\nCarrier";
+                CarrierName.Text = "Excalibur Class\nCarrier";
                 BattleshipName.Text = "Sovereign Class\nBattleship";
                 CruiserName.Text = "Akira Class\nCruiser";
                 DestroyerName.Text = "Defiant Class\nDestroyer";
@@ -524,96 +539,65 @@ namespace Sci_fi_Battleship
                 crspecialname = "Torpedo Spread";
                 despecialname = "Homing Torpedo";
                 scspecialname = "Sensor Scan";
+                Carrier.Image = Properties.Resources.FedCarrierDisplay;
+                Battleship.Image = Properties.Resources.FedBattleshipDisplay;
+                Cruiser.Image = Properties.Resources.FedCruiserDisplay;
+                Destroyer.Image = Properties.Resources.FedDestroyerDisplay;
+                Scout.Image = Properties.Resources.FedScoutDisplay;
             }
             if (PlayerFaction.Text == "Player Faction: KlE")
             {
-                CarrierName.Text = "SuQ'jagh Class\nCarrier";
-                BattleshipName.Text = "Ne'ghVar Class\nBattleship";
-                CruiserName.Text = "Vorcha Class\nCruiser";
-                DestroyerName.Text = "B'Rel Class\nDestroyer";
-                ScoutName.Text = "NuQ'DuJ Class\nScout";
-                caspecialname = "Carrier Strike";
+                CarrierName.Text = "Negh'Var Class\nCommand Battleship";
+                BattleshipName.Text = "Vor'cha Class\nBattleship";
+                CruiserName.Text = "K'Tinga Class\nCruiser";
+                DestroyerName.Text = "Koral Class\nDestroyer";
+                ScoutName.Text = "B'Rel Class\nScout";
+                caspecialname = "Disruptor Strike";
                 baspecialname = "Tricobalt Device";
                 crspecialname = "Torpedo Spread";
                 despecialname = "Homing Torpedo";
                 scspecialname = "Sensor Scan";
+                Carrier.Image = Properties.Resources.KliCarrierDisplay;
+                Battleship.Image = Properties.Resources.KliBattleshipDisplay;
+                Cruiser.Image = Properties.Resources.KliCruiserDisplay;
+                Destroyer.Image = Properties.Resources.KliDestroyerDisplay;
+                Scout.Image = Properties.Resources.KliScoutDisplay;
             }
             if (PlayerFaction.Text == "Player Faction: RSE")
             {
-                CarrierName.Text = "Hawk Class\nCarrier";
-                BattleshipName.Text = "D'Deridex Class\nBattleship";
-                CruiserName.Text = "Griffin Class\nCruiser";
-                DestroyerName.Text = "Shrike Class\nDestroyer";
+                CarrierName.Text = "Scimitar Class\nHeavy Warbird";
+                BattleshipName.Text = "D'Deridex Class\nWarbird";
+                CruiserName.Text = "Valdore Class\nCruiser";
+                DestroyerName.Text = "Vas Deletham Class\nDestroyer";
                 ScoutName.Text = "Talon Class\nScout";
                 caspecialname = "Scorpion Strike";
                 baspecialname = "Tricobalt Device";
                 crspecialname = "Torpedo Spread";
                 despecialname = "Homing Torpedo";
                 scspecialname = "Sensor Scan";
+                Carrier.Image = Properties.Resources.RomCarrierDisplay;
+                Battleship.Image = Properties.Resources.RomBattleshipDisplay;
+                Cruiser.Image = Properties.Resources.RomCruiserDisplay;
+                Destroyer.Image = Properties.Resources.RomDestroyerDisplay;
+                Scout.Image = Properties.Resources.RomScoutDisplay;
             }
-            if (PlayerFaction.Text == "Player Faction: BoC")
+            if (PlayerFaction.Text == "Player Faction: DoA")
             {
-                CarrierName.Text = "NO CARRIER\nAVAILABLE";
-                BattleshipName.Text = "Cube\nBattleship";
-                CruiserName.Text = "Sphere\nCruiser";
-                DestroyerName.Text = "NO DESTROYER\nAVAILABLE";
-                ScoutName.Text = "Probe\nScout";
-                caspecialname = "Cutting Beam";
-                baspecialname = "Tricobalt Device";
+                CarrierName.Text = "Cychreides Class\nDreadnought";
+                BattleshipName.Text = "Mantis Class\nBattleship";
+                CruiserName.Text = "Galor Clss\nCruiser";
+                DestroyerName.Text = "Scarab Class\nAttack Craft";
+                ScoutName.Text = "Hideki Class\nScout";
+                caspecialname = "Scarab Strike";
+                baspecialname = "Polaron Torpedo";
                 crspecialname = "Torpedo Spread";
                 despecialname = "Homing Torpedo";
                 scspecialname = "Sensor Scan";
-            }
-            if (PlayerFaction.Text == "Player Faction: ReA")
-            {
-                CarrierName.Text = "MC-80 Class\nCarrier";
-                BattleshipName.Text = "MC-75 Class\nBattleship";
-                CruiserName.Text = "Dreadnought Class\nCruiser";
-                DestroyerName.Text = "Nebulon-B Class\nFrigate";
-                ScoutName.Text = "CR70 Class\nCorvette";
-                caspecialname = "Proton Torpedo";
-                crspecialname = "Missile Spread";
-                despecialname = "Homing Missile";
-                scspecialname = "Scouting Run";
-            }
-            if (PlayerFaction.Text == "Player Faction: GaE")
-            {
-                CarrierName.Text = "Venator Class\nCarrier";
-                BattleshipName.Text = "Imperial Class\nBattleship";
-                CruiserName.Text = "Victory Class\nCruiser";
-                DestroyerName.Text = "Arquitens Class\nFrigate";
-                ScoutName.Text = "Raider Class\nCorvette";
-                caspecialname = "TIE Strike";
-                baspecialname = "Proton Torpedo";
-                crspecialname = "Missile Spread";
-                despecialname = "Homing Missile";
-                scspecialname = "Scouting Run";
-            }
-            if (PlayerFaction.Text == "Player Faction: TCK")
-            {
-                CarrierName.Text = "Mercury Class\nModern Battlestar";
-                BattleshipName.Text = "Jupiter Class\nBattlestar";
-                CruiserName.Text = "Ranger Class\nMissile Cruiser";
-                DestroyerName.Text = "Adamant Class\nFrigate";
-                ScoutName.Text = "Minotaur Class\nCorvette";
-                caspecialname = "Viper Strike";
-                baspecialname = "Nuclear Device";
-                crspecialname = "Missile Spread";
-                despecialname = "Homing Missile";
-                scspecialname = "Scouting Run";
-            }
-            if (PlayerFaction.Text == "Player Faction: CyE")
-            {
-                CarrierName.Text = "Modern Basestar\nModern Command Platform";
-                BattleshipName.Text = "Basestar\nCommand Platform";
-                CruiserName.Text = "Argos\nMissile Platform";
-                DestroyerName.Text = "Arachne\nAssault Cruiser";
-                ScoutName.Text = "Nemesis\nCorvette";
-                caspecialname = "Raider Strike";
-                baspecialname = "Nuclear Device";
-                crspecialname = "Missile Spread";
-                despecialname = "Homing Missile";
-                scspecialname = "Scouting Run";
+                Carrier.Image = Properties.Resources.DomCarrierDisplay;
+                Battleship.Image = Properties.Resources.DomBattleshipDisplay;
+                Cruiser.Image = Properties.Resources.DomCruiserDisplay;
+                Destroyer.Image = Properties.Resources.DomDestroyerDisplay;
+                Scout.Image = Properties.Resources.DomScoutDisplay;
             }
 
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
@@ -664,23 +648,23 @@ namespace Sci_fi_Battleship
             caspecial = false;
             carrierspecial = 5;
             SpecialAbilityButtons[0].Enabled = false;
-            SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+            SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
             baspecial = false;
             battleshipspecial = 4;
             SpecialAbilityButtons[1].Enabled = false;
-            SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+            SpecialAbilityButtons[1].Text = baspecialname + ": " + battleshipspecial + " turns remaining";
             crspecial = false;
             cruiserspecial = 3;
             SpecialAbilityButtons[2].Enabled = false;
-            SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+            SpecialAbilityButtons[2].Text = crspecialname + ": " + cruiserspecial + " turns remaining";
             despecial = false;
             destroyerspecial = 2;
             SpecialAbilityButtons[3].Enabled = false;
-            SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+            SpecialAbilityButtons[3].Text = despecialname + ": " + destroyerspecial + " turns remaining";
             scspecial = false;
             scoutspecial = 1;
             SpecialAbilityButtons[4].Enabled = false;
-            SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+            SpecialAbilityButtons[4].Text = scspecialname + ": " + scoutspecial + " turns remaining";
             enemyLocationPicker();
 
         }
@@ -797,7 +781,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Carrier";
-                    button.BackgroundImage = Properties.Resources.FedCarrier;
+                    button.BackgroundImage = Carrier.Image;
                     totalShips -= 1;
                     pcarrier -= 1;
                 }
@@ -807,7 +791,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Battleship";
-                    button.BackgroundImage = Properties.Resources.FedBattleship;
+                    button.BackgroundImage = Battleship.Image;
                     totalShips -= 1;
                     pbattleship -= 1;
                 }
@@ -817,7 +801,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Cruiser";
-                    button.BackgroundImage = Properties.Resources.FedCruiser;
+                    button.BackgroundImage = Cruiser.Image;
                     totalShips -= 1;
                     pcruiser -= 1;
                 }
@@ -827,7 +811,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Destroyer";
-                    button.BackgroundImage = Properties.Resources.FedDestroyer;
+                    button.BackgroundImage = Destroyer.Image;
                     totalShips -= 1;
                     pdestroyer -= 1;
                 }
@@ -837,7 +821,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Scout";
-                    button.BackgroundImage = Properties.Resources.FedScout;
+                    button.BackgroundImage = Scout.Image;
                     totalShips -= 1;
                     pscout -= 1;
                 }
@@ -992,7 +976,7 @@ namespace Sci_fi_Battleship
                 {
                     SpecialAbilityButtons[0].Enabled = false;
                     carrierspecial -= 1;
-                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
                 }
                 if (caspecial == true)
                 {
@@ -1003,20 +987,20 @@ namespace Sci_fi_Battleship
                     destroyerspecial = 2;
                     scoutspecial = 1;
                     SpecialAbilityButtons[0].Enabled = false;
-                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
                     SpecialAbilityButtons[1].Enabled = false;
-                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Text = baspecialname + ": " + battleshipspecial + " turns remaining";
                     SpecialAbilityButtons[2].Enabled = false;
-                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Text = crspecialname + ": " + cruiserspecial + " turns remaining";
                     SpecialAbilityButtons[3].Enabled = false;
-                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Text = despecialname + ": " + destroyerspecial + " turns remaining";
                     SpecialAbilityButtons[4].Enabled = false;
-                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Text = scspecialname + ": " + scoutspecial + " turns remaining";
                 }
                 if (carrierspecial == 0)
                 {
                     SpecialAbilityButtons[0].Enabled = true;
-                    SpecialAbilityButtons[0].Text = "Carrier Strike: Ready";
+                    SpecialAbilityButtons[0].Text = caspecialname + ": Ready";
                 }
             }
             if (pbattleshipalive == true)
@@ -1025,7 +1009,7 @@ namespace Sci_fi_Battleship
                 {
                     SpecialAbilityButtons[1].Enabled = false;
                     battleshipspecial -= 1;
-                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Text = baspecialname + ": " + battleshipspecial + " turns remaining";
                 }
                 if (baspecial == true)
                 {
@@ -1036,20 +1020,20 @@ namespace Sci_fi_Battleship
                     destroyerspecial = 2;
                     scoutspecial = 1;
                     SpecialAbilityButtons[0].Enabled = false;
-                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
                     SpecialAbilityButtons[1].Enabled = false;
-                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Text = baspecialname + ": " + battleshipspecial + " turns remaining";
                     SpecialAbilityButtons[2].Enabled = false;
-                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Text = crspecialname + ": " + cruiserspecial + " turns remaining";
                     SpecialAbilityButtons[3].Enabled = false;
-                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Text = despecialname + ": " + destroyerspecial + " turns remaining";
                     SpecialAbilityButtons[4].Enabled = false;
-                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Text = scspecialname + ": " + scoutspecial + " turns remaining";
                 }
                 if (battleshipspecial == 0)
                 {
                     SpecialAbilityButtons[1].Enabled = true;
-                    SpecialAbilityButtons[1].Text = "Tricobalt Device: Ready";
+                    SpecialAbilityButtons[1].Text = baspecialname+ ": Ready";
                 }
             }
             if (pcruiseralive == true)
@@ -1058,7 +1042,7 @@ namespace Sci_fi_Battleship
                 {
                     SpecialAbilityButtons[2].Enabled = false;
                     cruiserspecial -= 1;
-                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Text = crspecialname + ": " + cruiserspecial + " turns remaining";
                 }
                 if (crspecial == true)
                 {
@@ -1069,20 +1053,20 @@ namespace Sci_fi_Battleship
                     destroyerspecial = 2;
                     scoutspecial = 1;
                     SpecialAbilityButtons[0].Enabled = false;
-                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
                     SpecialAbilityButtons[1].Enabled = false;
-                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Text = baspecialname + ": " + battleshipspecial + " turns remaining";
                     SpecialAbilityButtons[2].Enabled = false;
-                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Text = crspecialname + ": " + cruiserspecial + " turns remaining";
                     SpecialAbilityButtons[3].Enabled = false;
-                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Text = despecialname + ": " + destroyerspecial + " turns remaining";
                     SpecialAbilityButtons[4].Enabled = false;
-                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Text = scspecialname + ": " + scoutspecial + " turns remaining";
                 }
                 if (cruiserspecial == 0)
                 {
                     SpecialAbilityButtons[2].Enabled = true;
-                    SpecialAbilityButtons[2].Text = "Torpedo Spread: Ready";
+                    SpecialAbilityButtons[2].Text = crspecialname + ": Ready";
                 }
             }
             if (pdestroyeralive == true)
@@ -1091,7 +1075,7 @@ namespace Sci_fi_Battleship
                 {
                     SpecialAbilityButtons[3].Enabled = false;
                     destroyerspecial -= 1;
-                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Text = despecialname + ": " + destroyerspecial + " turns remaining";
                 }
                 if (despecial == true)
                 {
@@ -1102,20 +1086,20 @@ namespace Sci_fi_Battleship
                     destroyerspecial = 2;
                     scoutspecial = 1;
                     SpecialAbilityButtons[0].Enabled = false;
-                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
                     SpecialAbilityButtons[1].Enabled = false;
-                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Text = baspecialname + ": " + battleshipspecial + " turns remaining";
                     SpecialAbilityButtons[2].Enabled = false;
-                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Text = crspecialname + ": " + cruiserspecial + " turns remaining";
                     SpecialAbilityButtons[3].Enabled = false;
-                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Text = despecialname + ": " + destroyerspecial + " turns remaining";
                     SpecialAbilityButtons[4].Enabled = false;
-                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Text = scspecialname + ": " + scoutspecial + " turns remaining";
                 }
                 if (destroyerspecial == 0)
                 {
                     SpecialAbilityButtons[3].Enabled = true;
-                    SpecialAbilityButtons[3].Text = "Homing Torpedo: Ready";
+                    SpecialAbilityButtons[3].Text = despecialname + ": Ready";
                 }
             }
             if (pscoutalive == true)
@@ -1124,7 +1108,7 @@ namespace Sci_fi_Battleship
                 {
                     SpecialAbilityButtons[4].Enabled = false;
                     scoutspecial -= 1;
-                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Text = scspecialname + ": " + scoutspecial + " turns remaining";
                 }
                 if (scspecial == true)
                 {
@@ -1135,20 +1119,20 @@ namespace Sci_fi_Battleship
                     destroyerspecial = 2;
                     scoutspecial = 1;
                     SpecialAbilityButtons[0].Enabled = false;
-                    SpecialAbilityButtons[0].Text = "Carrier Strike: " + carrierspecial + " turns remaining";
+                    SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
                     SpecialAbilityButtons[1].Enabled = false;
-                    SpecialAbilityButtons[1].Text = "Tricobalt Device: " + battleshipspecial + " turns remaining";
+                    SpecialAbilityButtons[1].Text = baspecialname + ": " + battleshipspecial + " turns remaining";
                     SpecialAbilityButtons[2].Enabled = false;
-                    SpecialAbilityButtons[2].Text = "Torpedo Spread: " + cruiserspecial + " turns remaining";
+                    SpecialAbilityButtons[2].Text = crspecialname + ": " + cruiserspecial + " turns remaining";
                     SpecialAbilityButtons[3].Enabled = false;
-                    SpecialAbilityButtons[3].Text = "Homing Torpedo: " + destroyerspecial + " turns remaining";
+                    SpecialAbilityButtons[3].Text = despecialname + ": " + destroyerspecial + " turns remaining";
                     SpecialAbilityButtons[4].Enabled = false;
-                    SpecialAbilityButtons[4].Text = "Sensor Scan: " + scoutspecial + " turns remaining";
+                    SpecialAbilityButtons[4].Text = scspecialname + ": " + scoutspecial + " turns remaining";
                 }
                 if (scoutspecial == 0)
                 {
                     SpecialAbilityButtons[4].Enabled = true;
-                    SpecialAbilityButtons[4].Text = "Sensor Scan: Ready";
+                    SpecialAbilityButtons[4].Text = scspecialname + ": Ready";
                 }
             }
             SpecialAbilityCooldown.Stop();

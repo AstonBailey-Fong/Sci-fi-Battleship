@@ -1273,6 +1273,8 @@ namespace Sci_fi_Battleship
             // 
             this.Carrier.BackColor = System.Drawing.Color.White;
             this.Carrier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Carrier.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Carrier.FlatAppearance.BorderSize = 0;
             this.Carrier.Image = global::Sci_fi_Battleship.Properties.Resources.FedCarrierDisplay;
             this.Carrier.Location = new System.Drawing.Point(208, 1760);
             this.Carrier.Name = "Carrier";
@@ -1286,6 +1288,8 @@ namespace Sci_fi_Battleship
             // 
             this.Battleship.BackColor = System.Drawing.Color.White;
             this.Battleship.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Battleship.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Battleship.FlatAppearance.BorderSize = 0;
             this.Battleship.Image = global::Sci_fi_Battleship.Properties.Resources.FedBattleshipDisplay;
             this.Battleship.Location = new System.Drawing.Point(547, 1760);
             this.Battleship.Name = "Battleship";
@@ -1299,6 +1303,8 @@ namespace Sci_fi_Battleship
             // 
             this.Cruiser.BackColor = System.Drawing.Color.White;
             this.Cruiser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Cruiser.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Cruiser.FlatAppearance.BorderSize = 0;
             this.Cruiser.Image = global::Sci_fi_Battleship.Properties.Resources.FedCruiserDisplay;
             this.Cruiser.Location = new System.Drawing.Point(885, 1760);
             this.Cruiser.Name = "Cruiser";
@@ -1312,6 +1318,8 @@ namespace Sci_fi_Battleship
             // 
             this.Destroyer.BackColor = System.Drawing.Color.White;
             this.Destroyer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Destroyer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Destroyer.FlatAppearance.BorderSize = 0;
             this.Destroyer.Image = global::Sci_fi_Battleship.Properties.Resources.FedDestroyerDisplay;
             this.Destroyer.Location = new System.Drawing.Point(1223, 1760);
             this.Destroyer.Name = "Destroyer";
@@ -1325,6 +1333,8 @@ namespace Sci_fi_Battleship
             // 
             this.Scout.BackColor = System.Drawing.Color.White;
             this.Scout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Scout.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Scout.FlatAppearance.BorderSize = 0;
             this.Scout.Image = global::Sci_fi_Battleship.Properties.Resources.FedScoutDisplay1;
             this.Scout.Location = new System.Drawing.Point(1558, 1760);
             this.Scout.Name = "Scout";
@@ -1341,9 +1351,9 @@ namespace Sci_fi_Battleship
             this.CarrierName.Font = new System.Drawing.Font("Okuda", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CarrierName.Location = new System.Drawing.Point(265, 1907);
             this.CarrierName.Name = "CarrierName";
-            this.CarrierName.Size = new System.Drawing.Size(166, 100);
+            this.CarrierName.Size = new System.Drawing.Size(192, 100);
             this.CarrierName.TabIndex = 96;
-            this.CarrierName.Text = "Typhon Class\r\nCarrier";
+            this.CarrierName.Text = "Excalibur Class\r\nCarrier";
             this.CarrierName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BattleshipName

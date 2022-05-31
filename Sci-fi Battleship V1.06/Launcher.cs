@@ -12,16 +12,16 @@ using WMPLib;
 
 namespace Sci_fi_Battleship
 {
-    public partial class Main_Menu : Form
+    public partial class Launcher : Form
     {
         string Player_Faction;
         string Enemy_Faction;
-
+        
         WindowsMediaPlayer Labackground = new WindowsMediaPlayer();
         SoundPlayer select = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\keyok6.wav");
         SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\input_failed_clean.wav");
 
-        public Main_Menu()
+        public Launcher()
         {
             InitializeComponent();
             Labackground.URL = "Launcher Music.mp3";
@@ -42,72 +42,40 @@ namespace Sci_fi_Battleship
                 unable.Play();
                 MessageBox.Show("Select a Faction you wish to play against.", "Help");
             }
-            if (PlayerFaction.Text == "United Federation of Planets (ST)")
+            if (PlayerFaction.Text == "United Federation of Planets")
             {
                 Player_Faction = "UFP";
             }
-            if (EnemyFaction.Text == "United Federation of Planets (ST)")
+            if (EnemyFaction.Text == "United Federation of Planets")
             {
                 Enemy_Faction = "UFP";
             }
-            if (PlayerFaction.Text == "Klingon Empire (ST)")
+            if (PlayerFaction.Text == "Klingon Empire")
             {
                 Player_Faction = "KlE";
             }
-            if (EnemyFaction.Text == "Klingon Empire (ST)")
+            if (EnemyFaction.Text == "Klingon Empire")
             {
                 Enemy_Faction = "KlE";
             }
-            if(PlayerFaction.Text == "Romulan Star Empire (ST)")
+            if(PlayerFaction.Text == "Romulan Star Empire")
             {
                 Player_Faction = "RSE";
             }
-            if (EnemyFaction.Text == "Romulan Star Empire (ST)")
+            if (EnemyFaction.Text == "Romulan Star Empire")
             {
                 Enemy_Faction = "RSE";
             }
-            if (PlayerFaction.Text == "Borg Collective (ST)")
+            if (PlayerFaction.Text == "Dominion Alliance")
             {
-                Player_Faction = "BoC";
+                Player_Faction = "DoA";
             }
-            if (EnemyFaction.Text == "Borg Collective (ST)")
+            if (EnemyFaction.Text == "Dominion Alliance")
             {
-                Enemy_Faction = "BoC";
+                Enemy_Faction = "DoA";
             }
-            if (PlayerFaction.Text == "Rebel Alliance (SW)")
             {
-                Player_Faction = "ReA";
-            }
-            if (EnemyFaction.Text == "Rebel Alliance (SW)")
-            {
-                Enemy_Faction = "ReA";
-            }
-            if (PlayerFaction.Text == "Galactic Empire (SW)")
-            {
-                Player_Faction = "GaE";
-            }
-            if (EnemyFaction.Text == "Galactic Empire (SW)")
-            {
-                Enemy_Faction = "GaE";
-            }
-            if (PlayerFaction.Text == "Twelve Colonies of Kobol (BSG)")
-            {
-                Player_Faction = "TCK";
-            }
-            if (EnemyFaction.Text == "Twelve Colonies of Kobol (BSG)")
-            {
-                Enemy_Faction = "TCK";
-            }
-            if (PlayerFaction.Text == "Cylon Empire (BSG)")
-            {
-                Player_Faction = "CyE";
-            }
-            if (EnemyFaction.Text == "Cylon Empire (BSG)")
-            {
-                Enemy_Faction = "CyE";
-            }
-            if (PlayerFaction.Text != "" && EnemyFaction.Text != "")
-            {
+                
                 select.Play();
                 StandardGame NewGame = new StandardGame(Player_Faction, Enemy_Faction);
 

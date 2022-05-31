@@ -175,4 +175,64 @@
   <data name="imperial_overconfidence_by_dariustrent_degtqcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imperial_overconfidence_by_dariustrent_degtqcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DomBattleshipDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DomBattleshipDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DomCarrierDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DomCarrierDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DomCruiserDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DomCruiserDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DomDestroyerDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DomDestroyerDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DomScoutDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DomScoutDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RomBattleshipDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RomBattleshipDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RomCarrierDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RomCarrierDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RomCruiserDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RomCruiserDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RomDestroyerDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RomDestroyerDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RomScoutDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RomScoutDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliBattleship" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliBattleship.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliBattleshipDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliBattleshipDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliCarrier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliCarrier.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliCarrierDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliCarrierDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliCruiser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliCruiser.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliCruiserDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliCruiserDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliDestroyer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliDestroyer.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliDestroyerDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliDestroyerDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliScout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliScout.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KliScoutDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KliScoutDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

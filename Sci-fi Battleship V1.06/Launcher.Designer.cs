@@ -1,7 +1,7 @@
 ﻿
 namespace Sci_fi_Battleship
 {
-    partial class Main_Menu
+    partial class Launcher
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,12 @@ namespace Sci_fi_Battleship
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Menu));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Launcher));
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.GameOptions = new System.Windows.Forms.CheckedListBox();
             this.PlayerFaction = new System.Windows.Forms.ComboBox();
             this.EnemyFaction = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -55,11 +55,11 @@ namespace Sci_fi_Battleship
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(668, 9);
+            this.label1.Location = new System.Drawing.Point(612, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(627, 91);
+            this.label1.Size = new System.Drawing.Size(777, 91);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Sci-Fi Battleship";
+            this.label1.Text = "Star Trek: Battleship";
             // 
             // label2
             // 
@@ -83,31 +83,27 @@ namespace Sci_fi_Battleship
             this.label3.TabIndex = 5;
             this.label3.Text = "Enemy Faction";
             // 
-            // checkedListBox1
+            // GameOptions
             // 
-            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.GameOptions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GameOptions.FormattingEnabled = true;
+            this.GameOptions.Items.AddRange(new object[] {
             "Disable Special Abilities",
             "Disable Sound Effects",
             "Disable Music"});
-            this.checkedListBox1.Location = new System.Drawing.Point(807, 220);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(355, 105);
-            this.checkedListBox1.TabIndex = 6;
+            this.GameOptions.Location = new System.Drawing.Point(807, 220);
+            this.GameOptions.Name = "GameOptions";
+            this.GameOptions.Size = new System.Drawing.Size(355, 105);
+            this.GameOptions.TabIndex = 6;
             // 
             // PlayerFaction
             // 
             this.PlayerFaction.FormattingEnabled = true;
             this.PlayerFaction.Items.AddRange(new object[] {
-            "United Federation of Planets (ST)",
-            "Klingon Empire (ST)",
-            "Romulan Star Empire (ST)",
-            "Borg Collective (ST)",
-            "Rebel Alliance (SW)",
-            "Galactic Empire (SW)",
-            "Twelve Colonies of Kobol (BSG)",
-            "Cylon Empire (BSG)"});
+            "United Federation of Planets",
+            "Klingon Empire",
+            "Romulan Star Empire",
+            "Dominion Alliance"});
             this.PlayerFaction.Location = new System.Drawing.Point(249, 220);
             this.PlayerFaction.Name = "PlayerFaction";
             this.PlayerFaction.Size = new System.Drawing.Size(410, 39);
@@ -117,20 +113,16 @@ namespace Sci_fi_Battleship
             // 
             this.EnemyFaction.FormattingEnabled = true;
             this.EnemyFaction.Items.AddRange(new object[] {
-            "United Federation of Planets (ST)",
-            "Klingon Empire (ST)",
-            "Romulan Star Empire (ST)",
-            "Borg Collective (ST)",
-            "Rebel Alliance (SW)",
-            "Galactic Empire (SW)",
-            "Twelve Colonies of Kobol (BSG)",
-            "Cylon Empire (BSG)"});
+            "United Federation of Planets",
+            "Klingon Empire",
+            "Romulan Star Empire",
+            "Dominion Alliance"});
             this.EnemyFaction.Location = new System.Drawing.Point(1530, 220);
             this.EnemyFaction.Name = "EnemyFaction";
             this.EnemyFaction.Size = new System.Drawing.Size(410, 39);
             this.EnemyFaction.TabIndex = 8;
             // 
-            // Main_Menu
+            // Launcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -139,13 +131,13 @@ namespace Sci_fi_Battleship
             this.ClientSize = new System.Drawing.Size(1978, 725);
             this.Controls.Add(this.EnemyFaction);
             this.Controls.Add(this.PlayerFaction);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.GameOptions);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Main_Menu";
+            this.Name = "Launcher";
             this.Text = "Launcher";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -158,7 +150,7 @@ namespace Sci_fi_Battleship
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox GameOptions;
         private System.Windows.Forms.ComboBox PlayerFaction;
         private System.Windows.Forms.ComboBox EnemyFaction;
     }

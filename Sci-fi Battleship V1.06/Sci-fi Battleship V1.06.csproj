@@ -199,6 +199,26 @@
     <None Include="Resources\imperial_overconfidence_by_dariustrent_degtqcb.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DomBattleshipDisplay.jpg" />
+    <None Include="Resources\DomCarrierDisplay.jpg" />
+    <None Include="Resources\DomCruiserDisplay.jpg" />
+    <None Include="Resources\DomDestroyerDisplay.jpg" />
+    <None Include="Resources\DomScoutDisplay.jpg" />
+    <None Include="Resources\RomBattleshipDisplay.jpg" />
+    <None Include="Resources\RomCarrierDisplay.jpg" />
+    <None Include="Resources\RomCruiserDisplay.jpg" />
+    <None Include="Resources\RomDestroyerDisplay.jpg" />
+    <None Include="Resources\RomScoutDisplay.jpg" />
+    <None Include="Resources\KliBattleship.jpg" />
+    <None Include="Resources\KliBattleshipDisplay.jpg" />
+    <None Include="Resources\KliCarrier.jpg" />
+    <None Include="Resources\KliCarrierDisplay.jpg" />
+    <None Include="Resources\KliCruiser.jpg" />
+    <None Include="Resources\KliCruiserDisplay.jpg" />
+    <None Include="Resources\KliDestroyer.jpg" />
+    <None Include="Resources\KliDestroyerDisplay.jpg" />
+    <None Include="Resources\KliScout.jpg" />
+    <None Include="Resources\KliScoutDisplay.jpg" />
     <Content Include="star-trek-icon-sov.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
