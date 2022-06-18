@@ -66,14 +66,24 @@ namespace Sci_fi_Battleship
         string crspecialname;
         string despecialname;
         string scspecialname;
+        bool playUFP = false;
+        bool enemUFP = false;
+        bool playKlE = false;
+        bool enemKlE = false;
+        bool playRSE = false;
+        bool enemRSE = false;
+        bool playDoA = false;
+        bool enemDoA = false;
 
         WindowsMediaPlayer background = new WindowsMediaPlayer();
         SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Stinger.wav");
         SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Ship Lost.wav");
         SoundPlayer select = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\keyok6.wav");
         SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\input_failed_clean.wav");
-        SoundPlayer playerfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\tng_phaser4_clean_top.wav");
-        SoundPlayer enemyfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\tng_disruptor_clean.wav");
+        SoundPlayer UFPfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\tng_phaser4_clean_top.wav");
+        SoundPlayer KlEfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\tng_disruptor_clean.wav");
+        SoundPlayer RSEfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.06\Resources\romulan_torpedo.wav");
+        SoundPlayer DoAfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.06\Resources\klingon_torpedo_clean.wav");
         SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion2.wav");
         SoundPlayer enemyhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion3.wav");
         SoundPlayer miss = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\smallexplosion3.wav");
@@ -90,18 +100,38 @@ namespace Sci_fi_Battleship
             if (Player_Faction == "UFP")
             {
                 background.URL = "Federation Ambient Theme.mp3";
+                playUFP = true;
             }
             if (Player_Faction == "KlE")
             {
                 background.URL = "Klingon Ambient Theme.mp3";
+                playKlE = true;
             }
             if (Player_Faction == "RSE")
             {
                 background.URL = "Romulan Ambient Theme.mp3";
+                playRSE = true;
             }
             if (Player_Faction == "DoA")
             {
                 background.URL = "Borg Ambient Theme.mp3";
+                playDoA = true;
+            }
+            if (Enemy_Faction == "UFP")
+            {
+                enemUFP = true;
+            }
+            if (Enemy_Faction == "KlE")
+            {
+                enemKlE = true;
+            }
+            if (Enemy_Faction == "RSE")
+            {
+                enemRSE = true;
+            }
+            if (Enemy_Faction == "DoA")
+            {
+                enemDoA = true;
             }
             background.settings.autoStart = true;
             background.settings.setMode("loop", true);
@@ -122,7 +152,22 @@ namespace Sci_fi_Battleship
         private void EnemyPlayTimerEvent(object sender, EventArgs e)
         {
             Thread.Sleep(3000);
-            enemyfire.Play();
+            if (enemUFP == true)
+            {
+                UFPfire.Play();
+            }
+            if (enemKlE == true)
+            {
+                KlEfire.Play();
+            }
+            if (enemRSE == true)
+            {
+                RSEfire.Play();
+            }
+            if (enemDoA == true)
+            {
+                DoAfire.Play();
+            }
             Thread.Sleep(3000);
             hittarget = false;
             crshots = 0;
@@ -408,7 +453,22 @@ namespace Sci_fi_Battleship
                         unable.Play();
                         MessageBox.Show("You have already attacked this position!", "Help");
                     }
-                    playerfire.Play();
+                    if (playUFP == true)
+                    {
+                        UFPfire.Play();
+                    }
+                    if (playKlE == true)
+                    {
+                        KlEfire.Play();
+                    }
+                    if (playRSE == true)
+                    {
+                        RSEfire.Play();
+                    }
+                    if (playDoA == true)
+                    {
+                        DoAfire.Play();
+                    }
                     Thread.Sleep(3000);
                     if (EnemyPositionButtons[index].Enabled)
                     {
@@ -550,7 +610,7 @@ namespace Sci_fi_Battleship
                 CarrierName.Text = "Negh'Var Class\nCommand Battleship";
                 BattleshipName.Text = "Vor'cha Class\nBattleship";
                 CruiserName.Text = "K'Tinga Class\nCruiser";
-                DestroyerName.Text = "Koral Class\nDestroyer";
+                DestroyerName.Text = "Korgal Class\nDestroyer";
                 ScoutName.Text = "B'Rel Class\nScout";
                 caspecialname = "Disruptor Strike";
                 baspecialname = "Tricobalt Device";

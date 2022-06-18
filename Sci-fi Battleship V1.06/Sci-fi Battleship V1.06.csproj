@@ -219,6 +219,7 @@
     <None Include="Resources\KliDestroyerDisplay.jpg" />
     <None Include="Resources\KliScout.jpg" />
     <None Include="Resources\KliScoutDisplay.jpg" />
+    <None Include="Resources\Battleship Final Wallpaper.jpg" />
     <Content Include="star-trek-icon-sov.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

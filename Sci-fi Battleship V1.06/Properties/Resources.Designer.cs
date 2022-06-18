@@ -73,6 +73,16 @@ namespace Sci_fi_Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Battleship_Final_Wallpaper {
+            get {
+                object obj = ResourceManager.GetObject("Battleship Final Wallpaper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DomBattleshipDisplay {
             get {
                 object obj = ResourceManager.GetObject("DomBattleshipDisplay", resourceCulture);
