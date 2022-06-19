@@ -18,8 +18,8 @@ namespace Sci_fi_Battleship
         string Enemy_Faction;
         
         WindowsMediaPlayer Labackground = new WindowsMediaPlayer();
-        SoundPlayer select = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\keyok6.wav");
-        SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\input_failed_clean.wav");
+        SoundPlayer select = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\keyok6.wav");
+        SoundPlayer unable = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\input_failed_clean.wav");
 
         public Launcher()
         {
