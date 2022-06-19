@@ -7,7 +7,7 @@
     <ProjectGuid>{F86BBE0C-5B24-4B8A-8A8F-4D6BA1A7E49A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Sci_fi_Battleship</RootNamespace>
-    <AssemblyName>Sci-fi Battleship V1.06</AssemblyName>
+    <AssemblyName>Sci-fi Battleship V1.07</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -220,6 +220,7 @@
     <None Include="Resources\KliScout.jpg" />
     <None Include="Resources\KliScoutDisplay.jpg" />
     <None Include="Resources\Battleship Final Wallpaper.jpg" />
+    <None Include="Resources\Nemesis.png" />
     <Content Include="star-trek-icon-sov.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

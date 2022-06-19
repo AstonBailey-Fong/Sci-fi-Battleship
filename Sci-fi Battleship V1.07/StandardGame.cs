@@ -79,22 +79,22 @@ namespace Sci_fi_Battleship
         bool enemDoA = false;
 
         WindowsMediaPlayer background = new WindowsMediaPlayer();
-        SoundPlayer Victory = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Stinger.wav");
-        SoundPlayer Defeat = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\Star Trek Legacy - Federation Ship Lost.wav");
-        SoundPlayer select = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\keyok6.wav");
-        SoundPlayer unable = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\input_failed_clean.wav");
-        SoundPlayer UFPfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\tng_phaser4_clean_top.wav");
-        SoundPlayer KlEfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\tng_disruptor_clean.wav");
-        SoundPlayer RSEfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.06\Resources\romulan_torpedo.wav");
-        SoundPlayer DoAfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.06\Resources\klingon_torpedo_clean.wav");
-        SoundPlayer playerhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion2.wav");
-        SoundPlayer enemyhit = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\largeexplosion3.wav");
-        SoundPlayer miss = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.03\Resources\smallexplosion3.wav");
-        SoundPlayer cruiserfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\tng_torpedo_clean.wav");
-        SoundPlayer battleshipfire = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\quantumtorpedoes.wav");
-        SoundPlayer tricobalt = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\largeexplosion1.wav");
-        SoundPlayer fighter = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\pulse.WAV");
-        SoundPlayer homing = new SoundPlayer(@"C:\Users\aston\Desktop\Google Drive\Year 12\Software Design and Development\Sci-fi Battleship\Sci-fi Battleship V1.05\Resources\quantumtorpeodoes2.wav");
+        SoundPlayer Victory = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\Star Trek Legacy - Federation Stinger.wav");
+        SoundPlayer Defeat = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\Star Trek Legacy - Federation Ship Lost.wav");
+        SoundPlayer select = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\keyok6.wav");
+        SoundPlayer unable = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\input_failed_clean.wav");
+        SoundPlayer UFPfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\tng_phaser4_clean_top.wav");
+        SoundPlayer KlEfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\tng_disruptor_clean.wav");
+        SoundPlayer RSEfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\romulan_torpedo.wav");
+        SoundPlayer DoAfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\klingon_torpedo_clean.wav");
+        SoundPlayer playerhit = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship\Sci-fi Battleship V1.07\Resources\largeexplosion2.wav");
+        SoundPlayer enemyhit = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\largeexplosion3.wav");
+        SoundPlayer miss = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\smallexplosion3.wav");
+        SoundPlayer cruiserfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\tng_torpedo_clean.wav");
+        SoundPlayer battleshipfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\quantumtorpedoes.wav");
+        SoundPlayer tricobalt = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\largeexplosion1.wav");
+        SoundPlayer fighter = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\pulse.WAV");
+        SoundPlayer homing = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\quantumtorpeodoes2.wav");
         public StandardGame(string Player_Faction, string Enemy_Faction)
         {
             InitializeComponent();

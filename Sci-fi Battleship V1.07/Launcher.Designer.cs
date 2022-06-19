@@ -52,11 +52,11 @@ namespace Sci_fi_Battleship
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Okuda", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(612, 9);
+            this.label1.Location = new System.Drawing.Point(689, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(777, 91);
+            this.label1.Size = new System.Drawing.Size(651, 127);
             this.label1.TabIndex = 1;
             this.label1.Text = "Star Trek: Battleship";
             // 
@@ -112,7 +112,7 @@ namespace Sci_fi_Battleship
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Sci_fi_Battleship.Properties.Resources.imperial_overconfidence_by_dariustrent_degtqcb;
+            this.BackgroundImage = global::Sci_fi_Battleship.Properties.Resources.Nemesis;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1978, 725);
             this.Controls.Add(this.EnemyFaction);

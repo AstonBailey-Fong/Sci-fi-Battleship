@@ -205,6 +205,9 @@
   <data name="DomDestroyerDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DomDestroyerDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Battleship Final Wallpaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Battleship Final Wallpaper.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RomDestroyerDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RomDestroyerDisplay.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -235,7 +238,7 @@
   <data name="FedCarrier" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FedCarrier.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Battleship Final Wallpaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Battleship Final Wallpaper.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Nemesis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Nemesis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
