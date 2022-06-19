@@ -28,7 +28,10 @@ namespace Sci_fi_Battleship
         String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
         String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank"};
         String[] EnemyShipPositions = { "Blank", "Blank", "Blank", "Blank", "Blank" };
-        String[] EnemyPositions = { "A1", "A2", "A3" , "A4", "A5", "A6", "B1", "B2", "B3", "B4", "B5", "B6", "C1", "C2", "C3", "C4", "C5", "C6", "D1", "D2", "D3", "D4", "D5", "D6", "E1", "E2", "E3", "E4", "E5", "E6", "F1", "F2", "F3", "F4", "F5", "F6"};
+        String[] EnemyPositions = { "A1", "A2", "A3" , "A4", "A5", "A6", "A7", "A8", "A9", "A10", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", 
+            "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10",
+            "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10",  "H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10",
+            "J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10",};
         Random rand = new Random();
         int totalShips = 5;
         int pcarrier = 0;
@@ -193,7 +196,7 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-
+                    Carrier.Image = Properties.Resources.missIcon;
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Battleship")
                 {
@@ -208,7 +211,7 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-
+                    Battleship.Image = Properties.Resources.missIcon;
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Cruiser")
                 {
@@ -223,7 +226,7 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-
+                    Cruiser.Image = Properties.Resources.missIcon;
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Destroyer")
                 {
@@ -238,7 +241,7 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-
+                    Destroyer.Image = Properties.Resources.missIcon;
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Scout")
                 {
@@ -253,6 +256,7 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
+                    Scout.Image = Properties.Resources.missIcon;
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == null && hittarget !=true)
                 {
@@ -582,8 +586,14 @@ namespace Sci_fi_Battleship
         private void RestartGame()
         {
             string[] EnemyShipClasses = {  "Enemy Carrier", "Enemy Battleship", "Enemy Cruiser", "Enemy Destroyer", "Enemy Scout"};
-            PlayerPositionButtons = new List<Button> { u1, u2, u3, u4, u5, u6, v1, v2, v3, v4, v5, v6, w1, w2, w3, w4, w5, w6, x1, x2, x3, x4, x5, x6, y1, y2, y3, y4, y5, y6, z1, z2, z3, z4, z5, z6};
-            EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, b1, b2, b3, b4, b5, b6, c1, c2, c3, c4, c5, c6, d1, d2, d3, d4, d5, d6, e1, e2, e3, e4, e5, e6, f1, f2, f3, f4, f5, f6 };
+            PlayerPositionButtons = new List<Button> { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, 
+                t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, 
+                w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, 
+                z1, z2, z3, z4, z5, z6, z7, z8, z9, z10};
+            EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, 
+                d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, f1, f2, f3, f4, f5, f6 ,f7, f8, f9, f10, 
+            g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10,
+            j1, j2, j3, j4, j5, j6, j7, j8, j9, j10};
             PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
             SpecialAbilityButtons = new List<Button> { CarrierSpecialB, BattleshipSpecialB, CruiserSpecialB, DestroyerSpecialB, ScoutSpecialB };
             txtHelp.Text = "Select the ship you want to place down, then select where you want it to go on the board.";
@@ -659,7 +669,58 @@ namespace Sci_fi_Battleship
                 Destroyer.Image = Properties.Resources.DomDestroyerDisplay;
                 Scout.Image = Properties.Resources.DomScoutDisplay;
             }
-
+            if (EnemyFaction.Text == "Enemy Faction: UFP")
+            {
+                EnemyCarrierName.Text = "Excalibur Class\nCarrier";
+                EnemyBattleshipName.Text = "Sovereign Class\nBattleship";
+                EnemyCruiserName.Text = "Akira Class\nCruiser";
+                EnemyDestroyerName.Text = "Defiant Class\nDestroyer";
+                EnemyScoutName.Text = "Nova Class\nScout";
+                EnemyCarrier.Image = Properties.Resources.FedCarrierDisplay;
+                EnemyBattleship.Image = Properties.Resources.FedBattleshipDisplay;
+                EnemyCruiser.Image = Properties.Resources.FedCruiserDisplay;
+                EnemyDestroyer.Image = Properties.Resources.FedDestroyerDisplay;
+                EnemyScout.Image = Properties.Resources.FedScoutDisplay;
+            }
+            if (EnemyFaction.Text == "Enemy Faction: KlE")
+            {
+                EnemyCarrierName.Text = "Negh'Var Class\nCommand Battleship";
+                EnemyBattleshipName.Text = "Vor'cha Class\nBattleship";
+                EnemyCruiserName.Text = "K'Tinga Class\nCruiser";
+                EnemyDestroyerName.Text = "Korgal Class\nDestroyer";
+                EnemyScoutName.Text = "B'Rel Class\nScout";
+                EnemyCarrier.Image = Properties.Resources.KliCarrierDisplay;
+                EnemyBattleship.Image = Properties.Resources.KliBattleshipDisplay;
+                EnemyCruiser.Image = Properties.Resources.KliCruiserDisplay;
+                EnemyDestroyer.Image = Properties.Resources.KliDestroyerDisplay;
+                EnemyScout.Image = Properties.Resources.KliScoutDisplay;
+            }
+            if (EnemyFaction.Text == "Enemy Faction: RSE")
+            {
+                EnemyCarrierName.Text = "Scimitar Class\nHeavy Warbird";
+                EnemyBattleshipName.Text = "D'Deridex Class\nWarbird";
+                EnemyCruiserName.Text = "Valdore Class\nCruiser";
+                EnemyDestroyerName.Text = "Vas Deletham Class\nDestroyer";
+                EnemyScoutName.Text = "Talon Class\nScout";
+                EnemyCarrier.Image = Properties.Resources.RomCarrierDisplay;
+                EnemyBattleship.Image = Properties.Resources.RomBattleshipDisplay;
+                EnemyCruiser.Image = Properties.Resources.RomCruiserDisplay;
+                EnemyDestroyer.Image = Properties.Resources.RomDestroyerDisplay;
+                EnemyScout.Image = Properties.Resources.RomScoutDisplay;
+            }
+            if (EnemyFaction.Text == "Enemy Faction: DoA")
+            {
+                EnemyCarrierName.Text = "Cychreides Class\nDreadnought";
+                EnemyBattleshipName.Text = "Mantis Class\nBattleship";
+                EnemyCruiserName.Text = "Galor Clss\nCruiser";
+                EnemyDestroyerName.Text = "Scarab Class\nAttack Craft";
+                EnemyScoutName.Text = "Hideki Class\nScout";
+                EnemyCarrier.Image = Properties.Resources.DomCarrierDisplay;
+                EnemyBattleship.Image = Properties.Resources.DomBattleshipDisplay;
+                EnemyCruiser.Image = Properties.Resources.DomCruiserDisplay;
+                EnemyDestroyer.Image = Properties.Resources.DomDestroyerDisplay;
+                EnemyScout.Image = Properties.Resources.DomScoutDisplay;
+            }
             for (int i = 0; i < EnemyPositionButtons.Count; i++)
             {
                 EnemyPositionButtons[i].Enabled = true;
@@ -841,7 +902,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Carrier";
-                    button.BackgroundImage = Carrier.Image;
+                    button.BackColor = Color.Orange;
                     totalShips -= 1;
                     pcarrier -= 1;
                 }
@@ -851,7 +912,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Battleship";
-                    button.BackgroundImage = Battleship.Image;
+                    button.BackColor = Color.Orange;
                     totalShips -= 1;
                     pbattleship -= 1;
                 }
@@ -861,7 +922,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Cruiser";
-                    button.BackgroundImage = Cruiser.Image;
+                    button.BackColor = Color.Orange;
                     totalShips -= 1;
                     pcruiser -= 1;
                 }
@@ -871,7 +932,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Destroyer";
-                    button.BackgroundImage = Destroyer.Image;
+                    button.BackColor = Color.Orange;
                     totalShips -= 1;
                     pdestroyer -= 1;
                 }
@@ -881,7 +942,7 @@ namespace Sci_fi_Battleship
                     select.Play();
                     button.Enabled = false;
                     button.Tag = "Player Scout";
-                    button.BackgroundImage = Scout.Image;
+                    button.BackColor = Color.Orange;
                     totalShips -= 1;
                     pscout -= 1;
                 }
