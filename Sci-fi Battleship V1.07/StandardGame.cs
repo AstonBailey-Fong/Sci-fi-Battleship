@@ -23,15 +23,17 @@ namespace Sci_fi_Battleship
         List<Button> EnemyPositionButtons;
         List<Button> PlayerSelectionButtons;
         List<Button> SpecialAbilityButtons;
+        List<string> EnemyShipPositionsList = new List<string>();
         String[] EnemyShipClasses = {  "Enemy Carrier", "Enemy Battleship", "Enemy Cruiser", "Enemy Destroyer", "Enemy Scout"};
         String[] tspreadtargets = { "Blank", "Blank", "Blank" };
         String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
-        String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank"};
-        String[] EnemyShipPositions = { "Blank", "Blank", "Blank", "Blank", "Blank" };
+        String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank"};
+        String[] EnemyShipPositions;
         String[] EnemyPositions = { "A1", "A2", "A3" , "A4", "A5", "A6", "A7", "A8", "A9", "A10", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", 
             "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10",
             "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10",  "H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10",
             "J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10",};
+        int[] ShipLengths = new int[] { 5, 4, 3, 2, 1};
         Random rand = new Random();
         int totalShips = 5;
         int pcarrier = 0;
@@ -50,6 +52,7 @@ namespace Sci_fi_Battleship
         int scoutspecial = 1;
         bool crspecial = false;
         string AttackPosition;
+        string LocationPosition;
         int torpspread = 0;
         bool caspecial = false;
         bool baspecial = false;
@@ -77,24 +80,37 @@ namespace Sci_fi_Battleship
         bool enemRSE = false;
         bool playDoA = false;
         bool enemDoA = false;
+        bool shiprotated = false;
+        int pcarrierhealth = 5;
+        int pbattleshiphealth = 4;
+        int pcruiserhealth = 3;
+        int pdestroyerhealth = 2;
+        int pscouthealth = 1;
+        int ecarrierhealth = 5;
+        int ebattleshiphealth = 4;
+        int ecruiserhealth = 3;
+        int edestroyerhealth = 2;
+        int escouthealth = 1;
+        bool failedplacement = false;
+        int eshiplength;
 
         WindowsMediaPlayer background = new WindowsMediaPlayer();
-        SoundPlayer Victory = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\Star Trek Legacy - Federation Stinger.wav");
-        SoundPlayer Defeat = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\Star Trek Legacy - Federation Ship Lost.wav");
-        SoundPlayer select = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\keyok6.wav");
-        SoundPlayer unable = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\input_failed_clean.wav");
-        SoundPlayer UFPfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\tng_phaser4_clean_top.wav");
-        SoundPlayer KlEfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\tng_disruptor_clean.wav");
-        SoundPlayer RSEfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\romulan_torpedo.wav");
-        SoundPlayer DoAfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\klingon_torpedo_clean.wav");
-        SoundPlayer playerhit = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship\Sci-fi Battleship V1.07\Resources\largeexplosion2.wav");
-        SoundPlayer enemyhit = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\largeexplosion3.wav");
-        SoundPlayer miss = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\smallexplosion3.wav");
-        SoundPlayer cruiserfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\tng_torpedo_clean.wav");
-        SoundPlayer battleshipfire = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\quantumtorpedoes.wav");
-        SoundPlayer tricobalt = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\largeexplosion1.wav");
-        SoundPlayer fighter = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\pulse.WAV");
-        SoundPlayer homing = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\quantumtorpeodoes2.wav");
+        SoundPlayer Victory = new SoundPlayer(Application.StartupPath + @"\Sound Effects\Star Trek Legacy - Federation Stinger.wav");
+        SoundPlayer Defeat = new SoundPlayer(Application.StartupPath + @"\Sound Effects\Star Trek Legacy - Federation Ship Lost.wav");
+        SoundPlayer select = new SoundPlayer(Application.StartupPath + @"\Sound Effects\keyok6.wav");
+        SoundPlayer unable = new SoundPlayer(Application.StartupPath + @"\Sound Effects\input_failed_clean.wav");
+        SoundPlayer UFPfire = new SoundPlayer(Application.StartupPath + @"\Sound Effects\tng_phaser4_clean_top.wav");
+        SoundPlayer KlEfire = new SoundPlayer(Application.StartupPath + @"\Sound Effects\tng_disruptor_clean.wav");
+        SoundPlayer RSEfire = new SoundPlayer(Application.StartupPath + @"\Sound Effects\romulan_torpedo.wav");
+        SoundPlayer DoAfire = new SoundPlayer(Application.StartupPath + @"\Sound Effects\klingon_torpedo_clean.wav");
+        SoundPlayer playerhit = new SoundPlayer(Application.StartupPath + @"\Sound Effects\largeexplosion2.wav");
+        SoundPlayer enemyhit = new SoundPlayer(Application.StartupPath + @"\Sound Effects\largeexplosion3.wav");
+        SoundPlayer miss = new SoundPlayer(Application.StartupPath + @"\Sound Effects\smallexplosion3.wav");
+        SoundPlayer cruiserfire = new SoundPlayer(Application.StartupPath + @"\Sound Effects\tng_torpedo_clean.wav");
+        SoundPlayer battleshipfire = new SoundPlayer(Application.StartupPath + @"\Sound Effects\quantumtorpedoes.wav");
+        SoundPlayer tricobalt = new SoundPlayer(Application.StartupPath + @"\Sound Effects\largeexplosion1.wav");
+        SoundPlayer fighter = new SoundPlayer(Application.StartupPath + @"\Sound Effects\pulse.WAV");
+        SoundPlayer homing = new SoundPlayer(Application.StartupPath + @"\Sound Effects\quantumtorpeodoes2.wav");
         public StandardGame(string Player_Faction, string Enemy_Faction)
         {
             InitializeComponent();
@@ -177,6 +193,7 @@ namespace Sci_fi_Battleship
             tritarg = 0;
             torpspread = 0;
             catargets = 0;
+            shots = 0;
             String[] tspreadtargets = { "Blank", "Blank", "Blank" };
             String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
             String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank" };
@@ -185,9 +202,6 @@ namespace Sci_fi_Battleship
             {
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Carrier")
                 {
-                    SpecialAbilityButtons[0].Enabled = false;
-                    SpecialAbilityButtons[0].BackgroundImage = Properties.Resources.missIcon;
-                    pcarrieralive = false;
                     PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
                     PlayerPositionButtons[Index].Enabled = false;
@@ -196,13 +210,18 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-                    Carrier.Image = Properties.Resources.missIcon;
+                    pcarrierhealth -= 1;
+                    if (pcarrierhealth == 0)
+                    {
+                        pcarrieralive = false;
+                        Carrier.Image = Properties.Resources.missIcon;
+                        SpecialAbilityButtons[0].Enabled = false;
+                        SpecialAbilityButtons[0].BackgroundImage = Properties.Resources.missIcon;
+                    }
+
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Battleship")
                 {
-                    SpecialAbilityButtons[1].Enabled = false;
-                    SpecialAbilityButtons[1].BackgroundImage = Properties.Resources.missIcon;
-                    pbattleshipalive = false;
                     PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
                     PlayerPositionButtons[Index].Enabled = false;
@@ -211,13 +230,18 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-                    Battleship.Image = Properties.Resources.missIcon;
+                    pbattleshiphealth -= 1;
+                    if(pbattleshiphealth == 0)
+                    {
+                        pbattleshipalive = false;
+                        Battleship.Image = Properties.Resources.missIcon;
+                        SpecialAbilityButtons[1].Enabled = false;
+                        SpecialAbilityButtons[1].BackgroundImage = Properties.Resources.missIcon;
+                    }
+
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Cruiser")
                 {
-                    SpecialAbilityButtons[2].Enabled = false;
-                    SpecialAbilityButtons[2].BackgroundImage = Properties.Resources.missIcon;
-                    pcruiseralive = false;
                     PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
                     PlayerPositionButtons[Index].Enabled = false;
@@ -226,13 +250,17 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-                    Cruiser.Image = Properties.Resources.missIcon;
+                    pcruiserhealth -= 1;
+                    if (pcruiserhealth == 0)
+                    {
+                        pcruiseralive = false;
+                        Cruiser.Image = Properties.Resources.missIcon;
+                        SpecialAbilityButtons[2].Enabled = false;
+                        SpecialAbilityButtons[2].BackgroundImage = Properties.Resources.missIcon;
+                    }
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Destroyer")
                 {
-                    SpecialAbilityButtons[3].Enabled = false;
-                    SpecialAbilityButtons[3].BackgroundImage = Properties.Resources.missIcon;
-                    pdestroyeralive = false;
                     PlayerPositionButtons[Index].BackgroundImage = Properties.Resources.fireIcon;
                     EnemyAttack.Text = PlayerPositionButtons[Index].Text;
                     PlayerPositionButtons[Index].Enabled = false;
@@ -241,7 +269,14 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
-                    Destroyer.Image = Properties.Resources.missIcon;
+                    pdestroyerhealth -= 1;
+                    if (pdestroyerhealth == 0)
+                    {
+                        pdestroyeralive = false;
+                        Destroyer.Image = Properties.Resources.missIcon;
+                        SpecialAbilityButtons[3].Enabled = false;
+                        SpecialAbilityButtons[3].BackgroundImage = Properties.Resources.missIcon;
+                    }
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == "Player Scout")
                 {
@@ -256,6 +291,7 @@ namespace Sci_fi_Battleship
                     PlayerPositionButtons.RemoveAt(Index);
                     enemyScore += 1;
                     hittarget = true;
+                    pscouthealth -= 1;
                     Scout.Image = Properties.Resources.missIcon;
                 }
                 if ((string)PlayerPositionButtons[Index].Tag == null && hittarget !=true)
@@ -271,7 +307,7 @@ namespace Sci_fi_Battleship
                 }
             }
             
-           if (enemyScore > 4 || playerScore > 4)
+           if (enemyScore > 14 || playerScore > 14)
             {
                 Thread.Sleep(3000);
                 EnemyPlayTimer.Stop();
@@ -307,7 +343,7 @@ namespace Sci_fi_Battleship
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
                 if (caspecial == true)
                 {
-                    for (int i = 0; i < 6; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         fighter.Play();
                         Thread.Sleep(600);
@@ -317,6 +353,49 @@ namespace Sci_fi_Battleship
                     {
                         AttackPosition = carriertargets[catargets].ToLower();
                         index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                        if (EnemyPositionButtons[index].Enabled)
+                        {
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier")
+                            {
+                                ecarrierhealth -= 1;
+                                if (ecarrierhealth == 0)
+                                {
+                                    EnemyCarrier.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Battleship")
+                            {
+                                ebattleshiphealth -= 1;
+                                if (ebattleshiphealth == 0)
+                                {
+                                    EnemyBattleship.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Cruiser")
+                            {
+                                ecruiserhealth -= 1;
+                                if (ecruiserhealth == 0)
+                                {
+                                    EnemyCruiser.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Destroyer")
+                            {
+                                edestroyerhealth -= 1;
+                                if (edestroyerhealth == 0)
+                                {
+                                    EnemyDestroyer.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                            {
+                                escouthealth -= 1;
+                                if (ecarrierhealth == 0)
+                                {
+                                    EnemyScout.Enabled = false;
+                                }
+                            }
+                        }
                         if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
                         {
                             EnemyPositionButtons[index].Enabled = false;
@@ -327,7 +406,7 @@ namespace Sci_fi_Battleship
                             tricobalt.Play();
                             btnAttack.BackColor = Color.White;
                             btnAttack.ForeColor = Color.Black;
-                            if (caspecial == true && catargets < 6)
+                            if (caspecial == true && catargets < 10)
                             {
                                 catargets += 1;
                             }
@@ -347,8 +426,8 @@ namespace Sci_fi_Battleship
                                 catargets += 1;
                             }
                         }
-                    } while (catargets < 6);
-                    if (catargets == 6)
+                    } while (catargets < 10);
+                    if (catargets == 10)
                     {
                         EnemyPlayTimer.Start();
                     }
@@ -363,7 +442,46 @@ namespace Sci_fi_Battleship
                         Thread.Sleep(1000);
                         if (EnemyPositionButtons[index].Enabled)
                         {
-
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier")
+                            {
+                                ecarrierhealth -= 1;
+                                if (ecarrierhealth == 0)
+                                {
+                                    EnemyCarrier.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Battleship")
+                            {
+                                ebattleshiphealth -= 1;
+                                if (ebattleshiphealth == 0)
+                                {
+                                    EnemyBattleship.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Cruiser")
+                            {
+                                ecruiserhealth -= 1;
+                                if (ecruiserhealth == 0)
+                                {
+                                    EnemyCruiser.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Destroyer")
+                            {
+                                edestroyerhealth -= 1;
+                                if (edestroyerhealth == 0)
+                                {
+                                    EnemyDestroyer.Enabled = false;
+                                }
+                            }
+                            if ((string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                            {
+                                escouthealth -= 1;
+                                if (ecarrierhealth == 0)
+                                {
+                                    EnemyScout.Enabled = false;
+                                }
+                            }
                             if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
                             {
                                 EnemyPositionButtons[index].Enabled = false;
@@ -374,6 +492,8 @@ namespace Sci_fi_Battleship
                                 playerhit.Play();
                                 btnAttack.BackColor = Color.White;
                                 btnAttack.ForeColor = Color.Black;
+                                
+                            
                                 if (crspecial == true && torpspread < 3)
                                 {
                                     torpspread += 1;
@@ -412,6 +532,46 @@ namespace Sci_fi_Battleship
                         AttackPosition = battleshiptargets[tritarg].ToLower();
                         shots = 0;
                         index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier")
+                        {
+                            ecarrierhealth -= 1;
+                            if (ecarrierhealth == 0)
+                            {
+                                EnemyCarrier.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Battleship")
+                        {
+                            ebattleshiphealth -= 1;
+                            if (ebattleshiphealth == 0)
+                            {
+                                EnemyBattleship.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Cruiser")
+                        {
+                            ecruiserhealth -= 1;
+                            if (ecruiserhealth == 0)
+                            {
+                                EnemyCruiser.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Destroyer")
+                        {
+                            edestroyerhealth -= 1;
+                            if (edestroyerhealth == 0)
+                            {
+                                EnemyDestroyer.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                        {
+                            escouthealth -= 1;
+                            if (ecarrierhealth == 0)
+                            {
+                                EnemyScout.Enabled = false;
+                            }
+                        }
                         if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
                         {
                             EnemyPositionButtons[index].Enabled = false;
@@ -422,6 +582,7 @@ namespace Sci_fi_Battleship
                             tricobalt.Play();
                             btnAttack.BackColor = Color.White;
                             btnAttack.ForeColor = Color.Black;
+                            
                             if (baspecial == true && tritarg < 5)
                             {
                                 tritarg += 1;
@@ -476,7 +637,46 @@ namespace Sci_fi_Battleship
                     Thread.Sleep(3000);
                     if (EnemyPositionButtons[index].Enabled)
                     {
-
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier")
+                        {
+                            ecarrierhealth -= 1;
+                            if (ecarrierhealth == 0)
+                            {
+                                EnemyCarrier.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Battleship")
+                        {
+                            ebattleshiphealth -= 1;
+                            if (ebattleshiphealth == 0)
+                            {
+                                EnemyBattleship.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Cruiser")
+                        {
+                            ecruiserhealth -= 1;
+                            if (ecruiserhealth == 0)
+                            {
+                                EnemyCruiser.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Destroyer")
+                        {
+                            edestroyerhealth -= 1;
+                            if (edestroyerhealth == 0)
+                            {
+                                EnemyDestroyer.Enabled = false;
+                            }
+                        }
+                        if ((string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                        {
+                            escouthealth -= 1;
+                            if (ecarrierhealth == 0)
+                            {
+                                EnemyScout.Enabled = false;
+                            }
+                        }
                         if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier" || (string)EnemyPositionButtons[index].Tag == "Enemy Battleship" || (string)EnemyPositionButtons[index].Tag == "Enemy Cruiser" || (string)EnemyPositionButtons[index].Tag == "Enemy Destroyer" || (string)EnemyPositionButtons[index].Tag == "Enemy Scout")
                         {
                             EnemyPositionButtons[index].Enabled = false;
@@ -518,6 +718,46 @@ namespace Sci_fi_Battleship
                 int index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
                 homing.Play();
                 Thread.Sleep(3000);
+                if ((string)EnemyPositionButtons[index].Tag == "Enemy Carrier")
+                {
+                    ecarrierhealth -= 1;
+                    if (ecarrierhealth == 0)
+                    {
+                        EnemyCarrier.Enabled = false;
+                    }
+                }
+                if ((string)EnemyPositionButtons[index].Tag == "Enemy Battleship")
+                {
+                    ebattleshiphealth -= 1;
+                    if (ebattleshiphealth == 0)
+                    {
+                        EnemyBattleship.Enabled = false;
+                    }
+                }
+                if ((string)EnemyPositionButtons[index].Tag == "Enemy Cruiser")
+                {
+                    ecruiserhealth -= 1;
+                    if (ecarrierhealth == 0)
+                    {
+                        EnemyCruiser.Enabled = false;
+                    }
+                }
+                if ((string)EnemyPositionButtons[index].Tag == "Enemy Destroyer")
+                {
+                    edestroyerhealth -= 1;
+                    if (edestroyerhealth == 0)
+                    {
+                        EnemyDestroyer.Enabled = false;
+                    }
+                }
+                if ((string)EnemyPositionButtons[index].Tag == "Enemy Scout")
+                {
+                    escouthealth -= 1;
+                    if (ecarrierhealth == 0)
+                    {
+                        EnemyScout.Enabled = false;
+                    }
+                }
                 EnemyPositionButtons[index].Enabled = false;
                 EnemyPositionButtons[index].BackgroundImage = Properties.Resources.fireIcon;
                 EnemyPositionButtons[index].BackColor = Color.DarkBlue;
@@ -533,7 +773,7 @@ namespace Sci_fi_Battleship
                 unable.Play();
                 MessageBox.Show("Choose a position to attack from the enemy's board.", "Help");
             }
-            if (enemyScore > 4 || playerScore > 4)
+            if (enemyScore > 14 || playerScore > 14)
             {
                 Thread.Sleep(3000);
                 background.controls.stop();
@@ -569,18 +809,23 @@ namespace Sci_fi_Battleship
         {
             for (int i = 0; i < 5; i++)
             {
+                eshiplength = ShipLengths[i];
                 int index = rand.Next(EnemyPositionButtons.Count);
-                if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null)
+                if (EnemyPositionButtons[index].Enabled == true && (string)EnemyPositionButtons[index].Tag == null && (index + eshiplength) < 100)
                 {
-                    EnemyPositionButtons[index].Tag = EnemyShipClasses[i];
-                    Debug.WriteLine(EnemyShipClasses[i] + " Position: " + EnemyPositionButtons[index].Text);
-                    EnemyShipPositions[i] = EnemyPositionButtons[index].Text;
+                    for (int j = index; j < (index + eshiplength); j++)
+                    {
+                        EnemyPositionButtons[j].Tag = EnemyShipClasses[i];
+                        Debug.WriteLine(EnemyShipClasses[i] + " Position: " + EnemyPositionButtons[j].Text);
+                        EnemyShipPositionsList.Add(EnemyPositionButtons[j].Text);
+                    }
                 }
                 else
                 {
                     index = rand.Next(EnemyPositionButtons.Count);
                 }
             }
+            EnemyShipPositions = EnemyShipPositionsList.ToArray();
         }
 
         private void RestartGame()
@@ -592,8 +837,8 @@ namespace Sci_fi_Battleship
                 z1, z2, z3, z4, z5, z6, z7, z8, z9, z10};
             EnemyPositionButtons = new List<Button> { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, 
                 d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, f1, f2, f3, f4, f5, f6 ,f7, f8, f9, f10, 
-            g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10,
-            j1, j2, j3, j4, j5, j6, j7, j8, j9, j10};
+                g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10,
+                j1, j2, j3, j4, j5, j6, j7, j8, j9, j10};
             PlayerSelectionButtons = new List<Button> { Carrier, Battleship, Cruiser, Destroyer, Scout };
             SpecialAbilityButtons = new List<Button> { CarrierSpecialB, BattleshipSpecialB, CruiserSpecialB, DestroyerSpecialB, ScoutSpecialB };
             txtHelp.Text = "Select the ship you want to place down, then select where you want it to go on the board.";
@@ -767,6 +1012,7 @@ namespace Sci_fi_Battleship
             btnAttack.BackColor = Color.White;
             btnAttack.ForeColor = Color.Black;
             caspecial = false;
+            shiprotated = false;
             carrierspecial = 5;
             SpecialAbilityButtons[0].Enabled = false;
             SpecialAbilityButtons[0].Text = caspecialname + ": " + carrierspecial + " turns remaining";
@@ -829,7 +1075,8 @@ namespace Sci_fi_Battleship
                 }
                 if (caspecial == true)
                 {
-                    if (EnemyLocation.Text == "A1"|| EnemyLocation.Text == "A2"|| EnemyLocation.Text == "A3"|| EnemyLocation.Text == "A4"|| EnemyLocation.Text == "A5"|| EnemyLocation.Text == "A6")
+                    if (EnemyLocation.Text == "A1"|| EnemyLocation.Text == "A2"|| EnemyLocation.Text == "A3"|| EnemyLocation.Text == "A4"|| EnemyLocation.Text == "A5"
+                        || EnemyLocation.Text == "A6" || EnemyLocation.Text == "A7" || EnemyLocation.Text == "A8" || EnemyLocation.Text == "A9" || EnemyLocation.Text == "A10")
                     {
                         carriertargets[0] = "A1";
                         carriertargets[1] = "A2";
@@ -837,8 +1084,13 @@ namespace Sci_fi_Battleship
                         carriertargets[3] = "A4";
                         carriertargets[4] = "A5";
                         carriertargets[5] = "A6";
+                        carriertargets[6] = "A7";
+                        carriertargets[7] = "A8";
+                        carriertargets[8] = "A9";
+                        carriertargets[9] = "A10";
                     }
-                    if (EnemyLocation.Text == "B1"|| EnemyLocation.Text == "B2"|| EnemyLocation.Text == "B3"|| EnemyLocation.Text == "B4"|| EnemyLocation.Text == "B5"|| EnemyLocation.Text == "B6")
+                    if (EnemyLocation.Text == "B1"|| EnemyLocation.Text == "B2"|| EnemyLocation.Text == "B3"|| EnemyLocation.Text == "B4"|| EnemyLocation.Text == "B5"
+                        || EnemyLocation.Text == "B6" || EnemyLocation.Text == "B7" || EnemyLocation.Text == "B8" || EnemyLocation.Text == "B9" || EnemyLocation.Text == "B10")
                     {
                         carriertargets[0] = "B1";
                         carriertargets[1] = "B2";
@@ -846,8 +1098,13 @@ namespace Sci_fi_Battleship
                         carriertargets[3] = "B4";
                         carriertargets[4] = "B5";
                         carriertargets[5] = "B6";
+                        carriertargets[6] = "B7";
+                        carriertargets[7] = "B8";
+                        carriertargets[8] = "B9";
+                        carriertargets[9] = "B10";
                     }
-                    if (EnemyLocation.Text == "C1"|| EnemyLocation.Text == "C2"|| EnemyLocation.Text == "C3"|| EnemyLocation.Text == "C4"|| EnemyLocation.Text == "C5"|| EnemyLocation.Text == "C6")
+                    if (EnemyLocation.Text == "C1"|| EnemyLocation.Text == "C2"|| EnemyLocation.Text == "C3"|| EnemyLocation.Text == "C4"|| EnemyLocation.Text == "C5"
+                        || EnemyLocation.Text == "C6" || EnemyLocation.Text == "C7" || EnemyLocation.Text == "C8" || EnemyLocation.Text == "C9" || EnemyLocation.Text == "C10")
                     {
                         carriertargets[0] = "C1";
                         carriertargets[1] = "C2";
@@ -855,8 +1112,13 @@ namespace Sci_fi_Battleship
                         carriertargets[3] = "C4";
                         carriertargets[4] = "C5";
                         carriertargets[5] = "C6";
+                        carriertargets[6] = "C7";
+                        carriertargets[7] = "C8";
+                        carriertargets[8] = "C9";
+                        carriertargets[9] = "C10";
                     }
-                    if (EnemyLocation.Text == "D1"|| EnemyLocation.Text == "D2"|| EnemyLocation.Text == "D3"|| EnemyLocation.Text == "D4"|| EnemyLocation.Text == "D5"|| EnemyLocation.Text == "D6")
+                    if (EnemyLocation.Text == "D1"|| EnemyLocation.Text == "D2"|| EnemyLocation.Text == "D3"|| EnemyLocation.Text == "D4"|| EnemyLocation.Text == "D5"
+                        || EnemyLocation.Text == "D6" || EnemyLocation.Text == "D7" || EnemyLocation.Text == "D8" || EnemyLocation.Text == "D9" || EnemyLocation.Text == "D10")
                     {
                         carriertargets[0] = "D1";
                         carriertargets[1] = "D2";
@@ -864,8 +1126,13 @@ namespace Sci_fi_Battleship
                         carriertargets[3] = "D4";
                         carriertargets[4] = "D5";
                         carriertargets[5] = "D6";
+                        carriertargets[6] = "D7";
+                        carriertargets[7] = "D8";
+                        carriertargets[8] = "D9";
+                        carriertargets[9] = "D10";
                     }
-                    if (EnemyLocation.Text == "E1"|| EnemyLocation.Text == "E2"|| EnemyLocation.Text == "E3"|| EnemyLocation.Text == "E4"|| EnemyLocation.Text == "E5"|| EnemyLocation.Text == "E6")
+                    if (EnemyLocation.Text == "E1"|| EnemyLocation.Text == "E2"|| EnemyLocation.Text == "E3"|| EnemyLocation.Text == "E4"|| EnemyLocation.Text == "E5"
+                        || EnemyLocation.Text == "E6" || EnemyLocation.Text == "E7" || EnemyLocation.Text == "E8" || EnemyLocation.Text == "E9" || EnemyLocation.Text == "E10")
                     {
                         carriertargets[0] = "E1";
                         carriertargets[1] = "E2";
@@ -873,8 +1140,13 @@ namespace Sci_fi_Battleship
                         carriertargets[3] = "E4";
                         carriertargets[4] = "E5";
                         carriertargets[5] = "E6";
+                        carriertargets[6] = "E7";
+                        carriertargets[7] = "E8";
+                        carriertargets[8] = "E9";
+                        carriertargets[9] = "E10";
                     }
-                    if (EnemyLocation.Text == "F1"|| EnemyLocation.Text == "F2"|| EnemyLocation.Text == "F3"|| EnemyLocation.Text == "F4"|| EnemyLocation.Text == "F5"|| EnemyLocation.Text == "F6")
+                    if (EnemyLocation.Text == "F1"|| EnemyLocation.Text == "F2"|| EnemyLocation.Text == "F3"|| EnemyLocation.Text == "F4"|| EnemyLocation.Text == "F5"
+                        || EnemyLocation.Text == "F6" || EnemyLocation.Text == "F7" || EnemyLocation.Text == "F8" || EnemyLocation.Text == "F9" || EnemyLocation.Text == "F10")
                     {
                         carriertargets[0] = "F1";
                         carriertargets[1] = "F2";
@@ -882,6 +1154,66 @@ namespace Sci_fi_Battleship
                         carriertargets[3] = "F4";
                         carriertargets[4] = "F5";
                         carriertargets[5] = "F6";
+                        carriertargets[6] = "F7";
+                        carriertargets[7] = "F8";
+                        carriertargets[8] = "F9";
+                        carriertargets[9] = "F10";
+                    }
+                    if (EnemyLocation.Text == "G1" || EnemyLocation.Text == "G2" || EnemyLocation.Text == "G3" || EnemyLocation.Text == "G4" || EnemyLocation.Text == "G5"
+                        || EnemyLocation.Text == "G6" || EnemyLocation.Text == "G7" || EnemyLocation.Text == "G8" || EnemyLocation.Text == "G9" || EnemyLocation.Text == "G10")
+                    {
+                        carriertargets[0] = "G1";
+                        carriertargets[1] = "G2";
+                        carriertargets[2] = "G3";
+                        carriertargets[3] = "G4";
+                        carriertargets[4] = "G5";
+                        carriertargets[5] = "G6";
+                        carriertargets[6] = "G7";
+                        carriertargets[7] = "G8";
+                        carriertargets[8] = "G9";
+                        carriertargets[9] = "G10";
+                    }
+                    if (EnemyLocation.Text == "H1" || EnemyLocation.Text == "H2" || EnemyLocation.Text == "H3" || EnemyLocation.Text == "H4" || EnemyLocation.Text == "H5"
+                        || EnemyLocation.Text == "H6" || EnemyLocation.Text == "H7" || EnemyLocation.Text == "H8" || EnemyLocation.Text == "H9" || EnemyLocation.Text == "H10")
+                    {
+                        carriertargets[0] = "H1";
+                        carriertargets[1] = "H2";
+                        carriertargets[2] = "H3";
+                        carriertargets[3] = "H4";
+                        carriertargets[4] = "H5";
+                        carriertargets[5] = "H6";
+                        carriertargets[6] = "H7";
+                        carriertargets[7] = "H8";
+                        carriertargets[8] = "H9";
+                        carriertargets[9] = "H10";
+                    }
+                    if (EnemyLocation.Text == "I1" || EnemyLocation.Text == "I2" || EnemyLocation.Text == "I3" || EnemyLocation.Text == "I4" || EnemyLocation.Text == "I5"
+                        || EnemyLocation.Text == "I6" || EnemyLocation.Text == "I7" || EnemyLocation.Text == "I8" || EnemyLocation.Text == "I9" || EnemyLocation.Text == "I10")
+                    {
+                        carriertargets[0] = "I1";
+                        carriertargets[1] = "I2";
+                        carriertargets[2] = "I3";
+                        carriertargets[3] = "I4";
+                        carriertargets[4] = "I5";
+                        carriertargets[5] = "I6";
+                        carriertargets[6] = "I7";
+                        carriertargets[7] = "I8";
+                        carriertargets[8] = "I9";
+                        carriertargets[9] = "I10";
+                    }
+                    if (EnemyLocation.Text == "J1" || EnemyLocation.Text == "J2" || EnemyLocation.Text == "J3" || EnemyLocation.Text == "J4" || EnemyLocation.Text == "J5"
+                        || EnemyLocation.Text == "J6" || EnemyLocation.Text == "J7" || EnemyLocation.Text == "J8" || EnemyLocation.Text == "J9" || EnemyLocation.Text == "J10")
+                    {
+                        carriertargets[0] = "J1";
+                        carriertargets[1] = "J2";
+                        carriertargets[2] = "J3";
+                        carriertargets[3] = "J4";
+                        carriertargets[4] = "J5";
+                        carriertargets[5] = "J6";
+                        carriertargets[6] = "J7";
+                        carriertargets[7] = "J8";
+                        carriertargets[8] = "J9";
+                        carriertargets[9] = "J10";
                     }
                 }
             }
@@ -900,49 +1232,287 @@ namespace Sci_fi_Battleship
                 {
                     var button = (Button)sender;
                     select.Play();
-                    button.Enabled = false;
-                    button.Tag = "Player Carrier";
-                    button.BackColor = Color.Orange;
-                    totalShips -= 1;
-                    pcarrier -= 1;
+                    shipplacement.Text = button.Text.ToLower();
+                    LocationPosition = shipplacement.Text;
+                    int i = PlayerPositionButtons.FindIndex(a => a.Name == LocationPosition);
+                    int LastPosition = i + 5;
+                    if (LastPosition < 0 || LastPosition > 100)
+                    {
+                        MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                        failedplacement = true;
+                        RestartGame();
+                    }
+                    if (shiprotated == true && LastPosition > 0 && LastPosition < 100)
+                    {
+                        LastPosition = i - 50;
+                        if (LastPosition < 0 || LastPosition > 100)
+                        {
+                            MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                            failedplacement = true;
+                            RestartGame();
+                        }
+                        else
+                        {
+                            for (int j = i; j > LastPosition; j -= 10)
+                            {
+                                if (PlayerPositionButtons[j].Tag != null)
+                                {
+                                    MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                    failedplacement = true;
+                                    RestartGame();
+                                }
+                                else
+                                {
+                                    PlayerPositionButtons[j].Enabled = false;
+                                    PlayerPositionButtons[j].Tag = "Player Carrier";
+                                    PlayerPositionButtons[j].BackColor = Color.Orange;
+                                }
+
+                            }
+                        }
+                    }
+                    if (shiprotated == false && LastPosition > 0 && LastPosition < 100)
+                    {
+                        for (int j = i; j < LastPosition; j++)
+                        {
+                            if (PlayerPositionButtons[j].Tag != null)
+                            {
+                                MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                failedplacement = true;
+                                RestartGame();
+                            }
+                            else
+                            {
+                                PlayerPositionButtons[j].Enabled = false;
+                                PlayerPositionButtons[j].Tag = "Player Carrier";
+                                PlayerPositionButtons[j].BackColor = Color.Orange;
+                            }
+                        }
+                    }
+                    if (failedplacement == false)
+                    {
+                        totalShips -= 1;
+                        pcarrier -= 1;
+                        shiprotated = false;
+                    }
                 }
                 if (pbattleship > 0)
                 {
                     var button = (Button)sender;
                     select.Play();
-                    button.Enabled = false;
-                    button.Tag = "Player Battleship";
-                    button.BackColor = Color.Orange;
-                    totalShips -= 1;
-                    pbattleship -= 1;
+                    shipplacement.Text = button.Text.ToLower();
+                    LocationPosition = shipplacement.Text;
+                    int i = PlayerPositionButtons.FindIndex(a => a.Name == LocationPosition);
+                    int LastPosition = i + 4;
+                    if (LastPosition < 0 || LastPosition > 100)
+                    {
+                        MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                        failedplacement = true;
+                        RestartGame();
+                    }
+                    if (shiprotated == true && LastPosition > 0 && LastPosition < 100)
+                    {
+                        LastPosition = i - 40;
+                        if (LastPosition < 0 || LastPosition > 100)
+                        {
+                            MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                            failedplacement = true;
+                            RestartGame();
+                        }
+                        else
+                        {
+                            for (int j = i; j > LastPosition; j -= 10)
+                            {
+                                if (PlayerPositionButtons[j].Tag != null)
+                                {
+                                    MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                    failedplacement = true;
+                                    RestartGame();
+                                }
+                                else
+                                {
+                                    PlayerPositionButtons[j].Enabled = false;
+                                    PlayerPositionButtons[j].Tag = "Player Battleship";
+                                    PlayerPositionButtons[j].BackColor = Color.Orange;
+                                }
+                                
+                            }
+                        }
+                    }
+                    if (shiprotated == false && LastPosition > 0 && LastPosition < 100)
+                    {
+                        for (int j = i; j < LastPosition; j++)
+                        {
+                            if (PlayerPositionButtons[j].Tag != null)
+                            {
+                                MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                failedplacement = true;
+                                RestartGame();
+                            }
+                            else
+                            {
+                                PlayerPositionButtons[j].Enabled = false;
+                                PlayerPositionButtons[j].Tag = "Player Battleship";
+                                PlayerPositionButtons[j].BackColor = Color.Orange;
+                            }
+                        }
+                    }
+                    if (failedplacement == false)
+                    {
+                        totalShips -= 1;
+                        pbattleship -= 1;
+                        shiprotated = false;
+                    }
                 }
                 if (pcruiser > 0)
                 {
                     var button = (Button)sender;
                     select.Play();
-                    button.Enabled = false;
-                    button.Tag = "Player Cruiser";
-                    button.BackColor = Color.Orange;
-                    totalShips -= 1;
-                    pcruiser -= 1;
+                    shipplacement.Text = button.Text.ToLower();
+                    LocationPosition = shipplacement.Text;
+                    int i = PlayerPositionButtons.FindIndex(a => a.Name == LocationPosition);
+                    int LastPosition = i + 3;
+                    if (LastPosition < 0 || LastPosition > 100)
+                    {
+                        MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                        failedplacement = true;
+                        RestartGame();
+                    }
+                    if (shiprotated == true && LastPosition > 0 && LastPosition < 100)
+                    {
+                        LastPosition = i - 30;
+                        if (LastPosition < 0 || LastPosition > 100)
+                        {
+                            MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                            failedplacement = true;
+                            RestartGame();
+                        }
+                        else
+                        {
+                            for (int j = i; j > LastPosition; j -= 10)
+                            {
+                                if (PlayerPositionButtons[j].Tag != null)
+                                {
+                                    MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                    failedplacement = true;
+                                    RestartGame();
+                                }
+                                else
+                                {
+                                    PlayerPositionButtons[j].Enabled = false;
+                                    PlayerPositionButtons[j].Tag = "Player Cruiser";
+                                    PlayerPositionButtons[j].BackColor = Color.Orange;
+                                }
+
+                            }
+                        }
+
+                    }
+                    if (shiprotated == false && LastPosition > 0 && LastPosition < 100)
+                    {
+                        for (int j = i; j < LastPosition; j++)
+                        {
+                            if (PlayerPositionButtons[j].Tag != null)
+                            {
+                                MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                failedplacement = true;
+                                RestartGame();
+                            }
+                            else
+                            {
+                                PlayerPositionButtons[j].Enabled = false;
+                                PlayerPositionButtons[j].Tag = "Player Cruiser";
+                                PlayerPositionButtons[j].BackColor = Color.Orange;
+                            }
+                        }
+                    }
+                    if (failedplacement == false)
+                    {
+                        totalShips -= 1;
+                        pcruiser -= 1;
+                        shiprotated = false;
+                    }
+                    
                 }
                 if (pdestroyer > 0)
                 {
                     var button = (Button)sender;
                     select.Play();
-                    button.Enabled = false;
-                    button.Tag = "Player Destroyer";
-                    button.BackColor = Color.Orange;
-                    totalShips -= 1;
-                    pdestroyer -= 1;
+                    shipplacement.Text = button.Text.ToLower();
+                    LocationPosition = shipplacement.Text;
+                    int i = PlayerPositionButtons.FindIndex(a => a.Name == LocationPosition);
+                    int LastPosition = i + 2;
+                    if (LastPosition < 0 || LastPosition > 100)
+                    {
+                        MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                        failedplacement = true;
+                        RestartGame();
+                    }
+                    if (shiprotated == true && LastPosition > 0 && LastPosition < 100)
+                    {
+                        LastPosition = i - 20;
+                        if (LastPosition < 0 || LastPosition > 100)
+                        {
+                            MessageBox.Show("Please place your ship so that it fits on the board.", "Error");
+                            failedplacement = true;
+                            RestartGame();
+                        }
+                        else
+                        {
+                            for (int j = i; j > LastPosition; j -= 10)
+                            {
+                                if (PlayerPositionButtons[j].Tag != null)
+                                {
+                                    MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                    failedplacement = true;
+                                    RestartGame();
+                                }
+                                else
+                                {
+                                    PlayerPositionButtons[j].Enabled = false;
+                                    PlayerPositionButtons[j].Tag = "Player Destroyer";
+                                    PlayerPositionButtons[j].BackColor = Color.Orange;
+                                }
+
+                            }
+                        }
+
+                    }
+                    if (shiprotated == false && LastPosition > 0 && LastPosition < 100)
+                    {
+                        for (int j = i; j < LastPosition; j++)
+                        {
+                            if (PlayerPositionButtons[j].Tag != null)
+                            {
+                                MessageBox.Show("Ship placement overlaps! Please place your ship so it does not interfere with another ship", "Error");
+                                failedplacement = true;
+                                RestartGame();
+                            }
+                            else
+                            {
+                                PlayerPositionButtons[j].Enabled = false;
+                                PlayerPositionButtons[j].Tag = "Player Destroyer";
+                                PlayerPositionButtons[j].BackColor = Color.Orange;
+                            }
+                        }
+                    }
+                    if (failedplacement == false)
+                    {
+                        totalShips -= 1;
+                        pdestroyer -= 1;
+                        shiprotated = false;
+                    }
                 }
                 if (pscout > 0)
                 {
                     var button = (Button)sender;
                     select.Play();
-                    button.Enabled = false;
-                    button.Tag = "Player Scout";
-                    button.BackColor = Color.Orange;
+                    shipplacement.Text = button.Text.ToLower();
+                    LocationPosition = shipplacement.Text;
+                    int i = PlayerPositionButtons.FindIndex(a => a.Name == LocationPosition);
+                    PlayerPositionButtons[i].Enabled = false;
+                    PlayerPositionButtons[i].Tag = "Player Scout";
+                    PlayerPositionButtons[i].BackColor = Color.Orange;
                     totalShips -= 1;
                     pscout -= 1;
                 }
@@ -988,6 +1558,7 @@ namespace Sci_fi_Battleship
             select.Play();
             var sbutton = (Button)sender;
             sbutton.Enabled = false;
+            failedplacement = false;
             pbattleship += 1;
         }
 
@@ -996,6 +1567,7 @@ namespace Sci_fi_Battleship
             select.Play();
             var sbutton = (Button)sender;
             sbutton.Enabled = false;
+            failedplacement = false;
             pcruiser += 1;
         }
 
@@ -1004,6 +1576,7 @@ namespace Sci_fi_Battleship
             select.Play();
             var sbutton = (Button)sender;
             sbutton.Enabled = false;
+            failedplacement = false;
             pcarrier += 1;
         }
 
@@ -1012,6 +1585,7 @@ namespace Sci_fi_Battleship
             select.Play();
             var sbutton = (Button)sender;
             sbutton.Enabled = false;
+            failedplacement = false;
             pdestroyer += 1;
         }
 
@@ -1020,6 +1594,7 @@ namespace Sci_fi_Battleship
             select.Play();
             var sbutton = (Button)sender;
             sbutton.Enabled = false;
+            failedplacement = false;
             pscout += 1;
         }
 
@@ -1257,6 +1832,15 @@ namespace Sci_fi_Battleship
                 }
             }
             SpecialAbilityCooldown.Stop();
+        }
+
+        private void Rotateship(object sender, EventArgs e)
+        {
+            select.Play();
+            if (shiprotated == false)
+            {
+                shiprotated = true;
+            }
         }
     }
 }

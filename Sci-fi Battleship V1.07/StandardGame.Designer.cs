@@ -266,6 +266,7 @@ namespace Sci_fi_Battleship
             this.EnemyCruiser = new System.Windows.Forms.Button();
             this.EnemyBattleship = new System.Windows.Forms.Button();
             this.EnemyCarrier = new System.Windows.Forms.Button();
+            this.shipplacement = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtHelp
@@ -3567,6 +3568,7 @@ namespace Sci_fi_Battleship
             this.rotateship.TabIndex = 273;
             this.rotateship.Text = "Rotate";
             this.rotateship.UseVisualStyleBackColor = true;
+            this.rotateship.Click += new System.EventHandler(this.Rotateship);
             // 
             // EnemyScoutName
             // 
@@ -3698,6 +3700,14 @@ namespace Sci_fi_Battleship
             this.EnemyCarrier.Tag = "Ship3";
             this.EnemyCarrier.UseVisualStyleBackColor = false;
             // 
+            // shipplacement
+            // 
+            this.shipplacement.AutoSize = true;
+            this.shipplacement.Location = new System.Drawing.Point(112, 356);
+            this.shipplacement.Name = "shipplacement";
+            this.shipplacement.Size = new System.Drawing.Size(0, 50);
+            this.shipplacement.TabIndex = 284;
+            // 
             // StandardGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
@@ -3706,6 +3716,7 @@ namespace Sci_fi_Battleship
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(3808, 2072);
+            this.Controls.Add(this.shipplacement);
             this.Controls.Add(this.EnemyScoutName);
             this.Controls.Add(this.EnemyDestroyerName);
             this.Controls.Add(this.EnemyCruiserName);
@@ -3944,7 +3955,7 @@ namespace Sci_fi_Battleship
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "StandardGame";
-            this.Text = "Sci-Fi Battleship V1.05";
+            this.Text = "Star Trek Battleship V1.07";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -4187,6 +4198,7 @@ namespace Sci_fi_Battleship
         private System.Windows.Forms.Button EnemyCruiser;
         private System.Windows.Forms.Button EnemyBattleship;
         private System.Windows.Forms.Button EnemyCarrier;
+        private System.Windows.Forms.Label shipplacement;
     }
 }
 

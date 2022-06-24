@@ -18,8 +18,9 @@ namespace Sci_fi_Battleship
         string Enemy_Faction;
         
         WindowsMediaPlayer Labackground = new WindowsMediaPlayer();
-        SoundPlayer select = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\keyok6.wav");
-        SoundPlayer unable = new SoundPlayer(Application.ExecutablePath + @"Sci-fi Battleship V1.07\Resources\input_failed_clean.wav");
+        //string appPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+        SoundPlayer select = new SoundPlayer(Application.StartupPath + @"\Sound Effects\keyok6.wav");
+        SoundPlayer unable = new SoundPlayer(Application.StartupPath + @"\Sound Effects\input_failed_clean.wav");
 
         public Launcher()
         {
@@ -74,6 +75,7 @@ namespace Sci_fi_Battleship
             {
                 Enemy_Faction = "DoA";
             }
+            if (PlayerFaction.Text != "" && EnemyFaction.Text != "")
             {
                 
                 select.Play();

@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.05", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.06", "Sci-fi Battleship V1.06\Sci-fi Battleship V1.06.csproj", "{2CD99C04-8D57-419E-8B3E-3256F87ED81F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sci-fi Battleship V1.07", "Sci-fi Battleship V1.07\Sci-fi Battleship V1.07.csproj", "{F86BBE0C-5B24-4B8A-8A8F-4D6BA1A7E49A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Star Trek Battleship V1.07", "Sci-fi Battleship V1.07\Star Trek Battleship V1.07.csproj", "{F86BBE0C-5B24-4B8A-8A8F-4D6BA1A7E49A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
