@@ -196,7 +196,7 @@ namespace Sci_fi_Battleship
             shots = 0;
             String[] tspreadtargets = { "Blank", "Blank", "Blank" };
             String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
-            String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank" };
+            String[] carriertargets = { "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank", "Blank" };
             int Index = rand.Next(PlayerPositionButtons.Count);
             if (PlayerPositionButtons.Count > 0)
             {
@@ -421,7 +421,7 @@ namespace Sci_fi_Battleship
                             EnemyPositionButtons[index].Tag = "Missed";
                             btnAttack.BackColor = Color.White;
                             btnAttack.ForeColor = Color.Black;
-                            if (caspecial == true && catargets < 6)
+                            if (caspecial == true && catargets < 10)
                             {
                                 catargets += 1;
                             }
@@ -1070,8 +1070,8 @@ namespace Sci_fi_Battleship
                     battleshiptargets[0] = EnemyPositions[i];
                     battleshiptargets[1] = EnemyPositions[i+1];
                     battleshiptargets[2] = EnemyPositions[i-1];
-                    battleshiptargets[3] = EnemyPositions[i+6];
-                    battleshiptargets[4] = EnemyPositions[i-6];
+                    battleshiptargets[3] = EnemyPositions[i+10];
+                    battleshiptargets[4] = EnemyPositions[i-10];
                 }
                 if (caspecial == true)
                 {
