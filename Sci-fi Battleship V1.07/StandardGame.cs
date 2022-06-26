@@ -349,7 +349,7 @@ namespace Sci_fi_Battleship
                         Thread.Sleep(600);
                     }
                     Thread.Sleep(400);
-                    do
+                    for (int i = 0; i < 10; i++)
                     {
                         AttackPosition = carriertargets[catargets].ToLower();
                         index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
@@ -406,11 +406,6 @@ namespace Sci_fi_Battleship
                             tricobalt.Play();
                             btnAttack.BackColor = Color.White;
                             btnAttack.ForeColor = Color.Black;
-                            if (caspecial == true && catargets < 10)
-                            {
-                                catargets += 1;
-                            }
-
                         }
                         else
                         {
@@ -421,15 +416,11 @@ namespace Sci_fi_Battleship
                             EnemyPositionButtons[index].Tag = "Missed";
                             btnAttack.BackColor = Color.White;
                             btnAttack.ForeColor = Color.Black;
-                            if (caspecial == true && catargets < 10)
-                            {
-                                catargets += 1;
-                            }
                         }
-                    } while (catargets < 10);
-                    if (catargets == 10)
-                    {
-                        EnemyPlayTimer.Start();
+                        if (i == 9)
+                        {
+                            EnemyPlayTimer.Start();
+                        }
                     }
                 }
                 if (crspecial == true)
