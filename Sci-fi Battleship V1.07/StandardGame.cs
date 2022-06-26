@@ -64,7 +64,6 @@ namespace Sci_fi_Battleship
         bool pdestroyeralive = true;
         bool pscoutalive = true;
         bool hittarget;
-        int catargets = 0;
         bool scspecial = false;
         bool despecial = false;
         string caspecialname;
@@ -192,7 +191,6 @@ namespace Sci_fi_Battleship
             crshots = 0;
             tritarg = 0;
             torpspread = 0;
-            catargets = 0;
             shots = 0;
             String[] tspreadtargets = { "Blank", "Blank", "Blank" };
             String[] battleshiptargets = { "Blank", "Blank", "Blank", "Blank", "Blank" };
@@ -351,7 +349,7 @@ namespace Sci_fi_Battleship
                     Thread.Sleep(400);
                     for (int i = 0; i < 10; i++)
                     {
-                        AttackPosition = carriertargets[catargets].ToLower();
+                        AttackPosition = carriertargets[i].ToLower();
                         index = EnemyPositionButtons.FindIndex(a => a.Name == AttackPosition);
                         if (EnemyPositionButtons[index].Enabled)
                         {
